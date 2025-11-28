@@ -1,0 +1,71 @@
+# Codemachine
+.codemachine/logs
+.codemachine/memory
+.codemachine/prompts
+.codemachine/agents
+.codemachine/template.json
+
+# System files
+.Xauthority
+.Xresources
+.bash_history*
+.dmrc
+.sudo_as_admin_successful
+.xsession-errors*
+
+# Cache directories
+.cache/
+.bun/
+.cargo/
+.npm/
+.nvm/
+.pyenv/
+.rustup/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# IDE and editor
+.vscode/
+.codex/
+.serena/
+.vmcp/
+
+# Credentials and secrets
+.git-credentials
+.gitconfig
+.ssh/
+GH\ token
+.gnupg/
+
+# System config
+.config/
+.local/
+.mozilla/
+.pki/
+.dbus/
+.gnome/
+.gtkrc*
+.linuxmint/
+
+# Virtual environments
+vbt_env/
+vectorbt_env/
+
+# Temporary and output files
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Node modules
+node_modules/
+
+# Python environments
+venv/
+env/
+ENV/
