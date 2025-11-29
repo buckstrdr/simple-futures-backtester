@@ -1,0 +1,80 @@
+{
+  "iteration_id": "I1",
+  "iteration_goal": "Fix critical bugs, add missing dependencies, and achieve 90%+ coverage on extensions modules",
+  "tasks": [
+    {
+      "task_id": "I1.T1",
+      "iteration_id": "I1",
+      "description": "Add pytest-benchmark dependency to pyproject.toml and verify installation",
+      "agent_type_hint": "SetupAgent",
+      "inputs": "Current pyproject.toml file",
+      "target_files": [
+        "pyproject.toml"
+      ],
+      "input_files": [
+        "pyproject.toml"
+      ],
+      "deliverables": "Updated pyproject.toml with pytest-benchmark>=4.0.0 in dev dependencies",
+      "acceptance_criteria": "- pytest-benchmark>=4.0.0 added to [project.optional-dependencies.dev]\n        - Dependencies install successfully via pip install -e .[dev]\n        - pytest --fixtures shows benchmark fixture available\n        - No version conflicts with existing dependencies",
+      "dependencies": [],
+      "parallelizable": false,
+      "done": true,
+      "completed_date": "2025-11-29",
+      "verification_report": "I1_T1_VERIFICATION_REPORT.md",
+      "notes": "Dependency was already present in pyproject.toml at line 60. Task focused on verification of installation and integration. All acceptance criteria met. Virtual environment at ./venv/ used for installation. 25 benchmark tests collected and execution verified."
+    },
+    {
+      "task_id": "I1.T4",
+      "iteration_id": "I1",
+      "iteration_goal": "Fix critical bugs, add missing dependencies, and achieve 90%+ coverage on extensions modules",
+      "description": "Create comprehensive tests for futures_portfolio.py (FuturesPortfolio wrapper class)",
+      "agent_type_hint": "BackendAgent",
+      "inputs": "Extensions futures_portfolio.py source code, VectorBT portfolio contract",
+      "target_files": [
+        "tests/test_extensions/test_futures_portfolio.py"
+      ],
+      "input_files": [
+        "simple_futures_backtester/extensions/futures_portfolio.py"
+      ],
+      "deliverables": "- New test file test_extensions/test_futures_portfolio.py\n        - Tests for point value application to PnL\n        - Tests for price units → dollar units conversion\n        - Tests verifying analytics methods match VectorBT output\n        - Tests with various point values (1.0, 2.0, 50.0) and tick sizes",
+      "acceptance_criteria": "- Test coverage for futures_portfolio.py reaches 90%+\n        - Tests verify correct dollar denomination vs VectorBT price units\n        - Tests verify all analytics methods (total_return, sharpe, max_drawdown, etc.)\n        - Tests verify tick_size handling (display only, not affecting calculations)\n        - All assertions use precise float comparisons or relative tolerances",
+      "dependencies": [],
+      "parallelizable": true,
+      "done": true,
+      "completed_date": "2025-11-29",
+      "verification_report": "I1_T4_VERIFICATION_REPORT.md",
+      "notes": "Test file already existed with comprehensive coverage. Verification confirmed 100% coverage (exceeds 90%+ target) with 53 passing tests across 8 test classes. All acceptance criteria verified: point value tests (1.0, 2.0, 50.0), dollar vs price units, all analytics methods, tick size handling (display-only), and precise float comparisons (1e-10 tolerance). Edge cases include zero trades, NaN/None/inf handling, all wins/losses scenarios."
+    },
+    {
+      "task_id": "I1.T6",
+      "iteration_id": "I1",
+      "description": "Run full test suite and generate coverage report",
+      "agent_type_hint": "BackendAgent",
+      "inputs": "All test files, pytest configuration",
+      "target_files": [
+        "htmlcov/",
+        "coverage.xml",
+        ".coverage"
+      ],
+      "input_files": [
+        "tests/",
+        "pyproject.toml",
+        "pytest.ini"
+      ],
+      "deliverables": "- HTML coverage report\n        - Coverage XML for CI integration\n        - Console coverage summary",
+      "acceptance_criteria": "- pytest runs successfully with all I1 tests\n        - Coverage report shows extensions modules at 90%+\n        - Coverage report shows validation module at 85%+\n        - No regressions in existing test suite\n        - Coverage data saved for comparison in later iterations",
+      "dependencies": [
+        "I1.T1",
+        "I1.T2",
+        "I1.T3",
+        "I1.T4",
+        "I1.T5"
+      ],
+      "parallelizable": false,
+      "done": true,
+      "completed_date": "2025-11-29",
+      "verification_report": "I1_COVERAGE_REPORT.md",
+      "notes": "All acceptance criteria exceeded. Extensions coverage: 100% (target ≥90%), Validation coverage: 96% (target ≥85%), Overall I1 coverage: 98.94%. All 178 I1 tests passing (138 extensions + 40 validation). Coverage artifacts generated: htmlcov/index.html, coverage.xml, .coverage. No regressions detected."
+    }
+  ]
+}

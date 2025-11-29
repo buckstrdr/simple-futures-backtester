@@ -1,0 +1,42 @@
+[
+  {
+    "task_id": "I5.T1",
+    "description": "Implement backtest and sweep commands",
+    "done": true
+  },
+  {
+    "task_id": "I5.T2",
+    "description": "Implement generate-bars command",
+    "done": true
+  },
+  {
+    "task_id": "I5.T3",
+    "description": "Add CLI integration tests",
+    "done": true
+  },
+  {
+    "task_id": "I5.T4",
+    "description": "Add benchmark command accepting --suite option (full/bars/backtest/indicators). Run pytest-benchmark programmatically and display throughput results vs targets in Rich table with pass/fail indicators. Add export command for re-exporting previous results with --format option (all/png/csv/html).",
+    "done": true
+  },
+  {
+    "task_id": "I5.T5",
+    "description": "Create tests/test_cli.py with integration tests using typer.testing.CliRunner. Test all commands with valid and invalid inputs. Verify exit codes, output file creation, and error messages. Use temporary directories for isolation. Test keyboard interrupt handling for sweep command.",
+    "done": true
+  },
+  {
+    "task_id": "I5.T6",
+    "description": "Create tests for output modules (reports, charts, exports). Verify report content and structure. Verify chart figures have expected traces and layout. Verify export files exist with correct content. Use fixtures for BacktestResult and SweepResult.",
+    "done": true
+  },
+  {
+    "task_id": "I5.T7",
+    "description": "Create tests/benchmarks/ with pytest-benchmark test files. Implement bench_bars.py testing all bar generators with 1M row fixture. Implement bench_backtest.py testing single backtest latency. Implement bench_sweep.py testing 100-combo sweep. Store baseline measurements in tests/benchmarks/baselines/.",
+    "done": true
+  },
+  {
+    "task_id": "I5.T8",
+    "description": "Update README.md with installation instructions (including VectorBT fork), quick start guide, and CLI command reference. Create docs/guides/quickstart.md with step-by-step tutorial. Create docs/guides/strategies.md explaining strategy development. Create docs/guides/bar_types.md documenting alternative bars. Create docs/api/reference.md with Python API documentation.",
+    "done": true
+  }
+]

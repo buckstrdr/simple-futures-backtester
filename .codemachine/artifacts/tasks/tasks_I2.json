@@ -1,0 +1,122 @@
+[
+  {
+    "task_id": "I2.T1",
+    "iteration_id": "I2",
+    "iteration_goal": "Enhance test coverage for all 6 bar generator types from 27-50% to 70%+",
+    "description": "Enhance test_dollar_bars.py to achieve 70%+ coverage",
+    "agent_type_hint": "BackendAgent",
+    "inputs": "bars/dollar_bars.py source, existing tests",
+    "target_files": [
+      "tests/test_bars/test_dollar_bars.py"
+    ],
+    "input_files": [
+      "simple_futures_backtester/bars/dollar_bars.py",
+      "tests/test_bars/test_dollar_bars.py"
+    ],
+    "deliverables": "- Tests for dollar value accumulation\n- Tests for volume tracking per bar\n- Edge cases (zero volume, high prices)\n- Performance benchmark test\n- bar_indices mapping verification",
+    "acceptance_criteria": "- Coverage for dollar_bars.py reaches 70%+\n- All accumulation scenarios tested\n- Performance target met (1M+ rows/sec)\n- Edge cases handled gracefully",
+    "dependencies": [],
+    "parallelizable": true,
+    "done": false
+  },
+  {
+    "task_id": "I2.T2",
+    "iteration_id": "I2",
+    "iteration_goal": "Enhance test coverage for all 6 bar generator types from 27-50% to 70%+",
+    "description": "Enhance test_range_bars.py to achieve 70%+ coverage",
+    "agent_type_hint": "BackendAgent",
+    "inputs": "bars/range_bars.py source, existing tests",
+    "target_files": [
+      "tests/test_bars/test_range_bars.py"
+    ],
+    "input_files": [
+      "simple_futures_backtester/bars/range_bars.py",
+      "tests/test_bars/test_range_bars.py"
+    ],
+    "deliverables": "- Tests for fixed range generation\n- Tests for range accumulation logic\n- Edge cases (narrow ranges, wide ranges, zero range)\n- Performance benchmark test\n- bar_indices mapping verification",
+    "acceptance_criteria": "- Coverage for range_bars.py reaches 70%+\n- All accumulation scenarios tested\n- Performance target met (1M+ rows/sec)\n- Edge cases handled gracefully",
+    "dependencies": [],
+    "parallelizable": true,
+    "done": true
+  },
+  {
+    "task_id": "I2.T3",
+    "iteration_id": "I2",
+    "iteration_goal": "Enhance test coverage for all 6 bar generator types from 27-50% to 70%+",
+    "description": "Enhance test_tick_bars.py to achieve 70%+ coverage",
+    "agent_type_hint": "BackendAgent",
+    "inputs": "bars/tick_bars.py source, existing tests",
+    "target_files": [
+      "tests/test_bars/test_tick_bars.py"
+    ],
+    "input_files": [
+      "simple_futures_backtester/bars/tick_bars.py",
+      "tests/test_bars/test_tick_bars.py"
+    ],
+    "deliverables": "- Tests for fixed tick count generation\n- Tests for tick accumulation\n- Edge cases (single tick, large tick counts)\n- Performance benchmark test\n- bar_indices mapping verification",
+    "acceptance_criteria": "- Coverage for tick_bars.py reaches 70%+\n- All accumulation scenarios tested\n- Performance target met (1M+ rows/sec)\n- Edge cases handled gracefully",
+    "dependencies": [],
+    "parallelizable": true,
+    "done": false
+  },
+  {
+    "task_id": "I2.T4",
+    "iteration_id": "I2",
+    "iteration_goal": "Enhance test coverage for all 6 bar generator types from 27-50% to 70%+",
+    "description": "Enhance test_volume_bars.py to achieve 70%+ coverage",
+    "agent_type_hint": "BackendAgent",
+    "inputs": "bars/volume_bars.py source, existing tests",
+    "target_files": [
+      "tests/test_bars/test_volume_bars.py"
+    ],
+    "input_files": [
+      "simple_futures_backtester/bars/volume_bars.py",
+      "tests/test_bars/test_volume_bars.py"
+    ],
+    "deliverables": "- Tests for volume threshold generation\n- Tests for volume accumulation\n- Edge cases (zero volume, extreme volumes)\n- Performance benchmark test\n- bar_indices mapping verification",
+    "acceptance_criteria": "- Coverage for volume_bars.py reaches 70%+\n- All accumulation scenarios tested\n- Performance target met (1M+ rows/sec)\n- Edge cases handled gracefully",
+    "dependencies": [],
+    "parallelizable": true,
+    "done": false
+  },
+  {
+    "task_id": "I2.T5",
+    "iteration_id": "I2",
+    "iteration_goal": "Enhance test coverage for all 6 bar generator types from 27-50% to 70%+",
+    "description": "Enhance test_renko.py to achieve 70%+ coverage",
+    "agent_type_hint": "BackendAgent",
+    "inputs": "bars/renko.py source, existing tests",
+    "target_files": [
+      "tests/test_bars/test_renko.py"
+    ],
+    "input_files": [
+      "simple_futures_backtester/bars/renko.py",
+      "tests/test_bars/test_renko.py"
+    ],
+    "deliverables": "- Tests for brick_size generation\n- Tests for directional brick formation\n- Edge cases (reversals, consolidation)\n- Performance benchmark test\n- bar_indices mapping verification",
+    "acceptance_criteria": "- Coverage for renko.py reaches 70%+\n- All brick formation scenarios tested\n- Performance target met (1M+ rows/sec)\n- Edge cases handled gracefully",
+    "dependencies": [],
+    "parallelizable": true,
+    "done": false
+  },
+  {
+    "task_id": "I2.T6",
+    "iteration_id": "I2",
+    "iteration_goal": "Enhance test coverage for all 6 bar generator types from 27-50% to 70%+",
+    "description": "Enhance test_imbalance_bars.py to achieve 70%+ coverage",
+    "agent_type_hint": "BackendAgent",
+    "inputs": "bars/imbalance_bars.py source, existing tests",
+    "target_files": [
+      "tests/test_bars/test_imbalance_bars.py"
+    ],
+    "input_files": [
+      "simple_futures_backtester/bars/imbalance_bars.py",
+      "tests/test_bars/test_imbalance_bars.py"
+    ],
+    "deliverables": "- Tests for tick/dollar/volume imbalance generation\n- Tests for theta estimation (EMA)\n- Edge cases (zero imbalance, extreme imbalance)\n- Performance benchmark test\n- bar_indices mapping verification",
+    "acceptance_criteria": "- Coverage for imbalance_bars.py reaches 70%+\n- All imbalance scenarios tested\n- Performance target met (1M+ rows/sec)\n- Edge cases handled gracefully",
+    "dependencies": [],
+    "parallelizable": true,
+    "done": false
+  }
+]

@@ -1,0 +1,35 @@
+# Breakout Strategy Parameter Sweep Configuration
+# Optimizes EMA crossover parameters across a grid of values
+
+sweep:
+  strategy: breakout
+  parameters:
+    # Fast EMA period sweep
+    fast_period:
+      - 5
+      - 8
+      - 10
+      - 12
+      - 15
+
+    # Slow EMA period sweep
+    slow_period:
+      - 20
+      - 25
+      - 30
+      - 40
+      - 50
+
+  backtest_overrides:
+    initial_capital: 100000
+    fees: 0.0001
+    slippage: 0.0001
+    size: 1
+
+backtest:
+  initial_capital: 100000
+  fees: 0.0001
+  slippage: 0.0001
+  size: 1
+  size_type: fixed
+  freq: 1D

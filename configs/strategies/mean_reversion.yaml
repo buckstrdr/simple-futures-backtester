@@ -1,0 +1,17 @@
+# Mean Reversion Strategy Configuration
+# Uses Bollinger Bands to identify overbought/oversold conditions
+
+strategy:
+  name: mean_reversion
+  parameters:
+    # Bollinger Bands settings
+    bb_period: 20       # Lookback period for Bollinger Bands
+    bb_std: 2.0         # Number of standard deviations for bands
+
+backtest:
+  initial_capital: 100000
+  fees: 0.0001
+  slippage: 0.0001
+  size: 1
+  size_type: fixed
+  freq: 1D

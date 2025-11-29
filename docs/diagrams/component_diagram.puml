@@ -1,0 +1,88 @@
+@startuml Simple Futures Backtester - Component Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Simple Futures Backtester - Component Architecture (C4 Level 3)
+
+LAYOUT_WITH_LEGEND()
+
+Container_Boundary(sfb, "Simple Futures Backtester") {
+
+    Component(cli, "CLI", "Typer/Rich", "Command-line interface for orchestrating backtest workflows")
+
+    Component(config, "Configuration", "config/", "YAML-based configuration loading and validation")
+
+    Component(dataLoader, "DataLoader", "data/loader.py", "Reads CSV/Parquet files, normalizes dtypes, enforces schema")
+
+    Component(dataValidation, "DataValidation", "data/validation.py", "Applies numeric bounds, timestamp ordering, gap detection")
+
+    Component(barFactory, "BarFactory", "bars/", "JIT bar generators: time, renko, range, volume, imbalance")
+
+    Component(indicatorKernel, "IndicatorKernel", "indicators/", "JIT indicator suite: trend, momentum, volatility, volume")
+
+    Component(strategyFramework, "StrategyFramework", "strategy/", "Strategy base class, signal generation, entry/exit logic")
+
+    Component(backtestEngine, "BacktestEngine", "backtest/engine.py", "Portfolio simulation wrapper, translates signals to trades")
+
+    Component(metricsCalc, "MetricsCalculator", "metrics/", "Performance metrics, drawdown analysis, trade statistics")
+
+    Component(sweepOrchestrator, "SweepOrchestrator", "sweep/", "Parameter sweep coordination, batch processing")
+
+    Component(outputReporter, "OutputReporter", "output/", "Results formatting, CSV/JSON export, visualization")
+
+    Component(jitUtils, "JIT Utilities", "utils/numba_utils.py", "Shared Numba JIT kernels and compilation utilities")
+}
+
+Container_Boundary(ext, "Extensions") {
+    Component(customBars, "Custom Bars", "extensions/bars/", "Alternative bar types (renko, range, volume, imbalance)")
+
+    Component(trailingStops, "Trailing Stops", "extensions/stops/", "Trailing stop-loss implementations")
+
+    Component(futuresWrapper, "Futures Portfolio", "extensions/portfolio/", "Futures-specific portfolio wrapper with margin/expiry")
+}
+
+Container_Boundary(vbtLib, "VectorBT Library (Fork v0.26.2)") {
+    Component(vbtIndicators, "VBT Indicators", "vectorbt.indicators", "Battle-tested indicators: RSI, MA, MACD, ATR, BBANDS")
+
+    Component(vbtPortfolio, "VBT Portfolio", "vectorbt.Portfolio", "Portfolio simulation engine with from_signals()")
+
+    Component(vbtRecords, "VBT Records", "vectorbt.records", "Trade records, order records, event handling")
+}
+
+' External dependencies
+System_Ext(numpy, "NumPy", "N-dimensional array operations")
+System_Ext(pandas, "Pandas", "DataFrame operations")
+System_Ext(numba, "Numba", "JIT compilation for NumPy")
+
+' Relationships - CLI orchestration
+Rel(cli, config, "Loads")
+Rel(cli, dataLoader, "Initiates data load")
+Rel(cli, sweepOrchestrator, "Launches sweeps")
+Rel(cli, outputReporter, "Triggers output")
+
+' Data flow
+Rel(dataLoader, dataValidation, "Passes raw data")
+Rel(dataValidation, barFactory, "Provides validated OHLCV")
+Rel(barFactory, indicatorKernel, "Feeds bar data")
+Rel(indicatorKernel, strategyFramework, "Provides indicator values")
+Rel(strategyFramework, backtestEngine, "Generates entry/exit signals")
+Rel(backtestEngine, metricsCalc, "Produces BacktestResult")
+Rel(metricsCalc, outputReporter, "Provides metrics")
+
+' VectorBT integration
+Rel(indicatorKernel, vbtIndicators, "Uses for RSI, MA, etc.", "library call")
+Rel(backtestEngine, vbtPortfolio, "Invokes Portfolio.from_signals", "library call")
+Rel(backtestEngine, vbtRecords, "Extracts trade records")
+
+' Extensions integration
+Rel(barFactory, customBars, "Invokes alternative bar generators")
+Rel(strategyFramework, trailingStops, "Applies trailing stop logic")
+Rel(backtestEngine, futuresWrapper, "Uses for futures-specific simulation")
+
+' Low-level dependencies
+Rel(indicatorKernel, jitUtils, "Uses JIT utilities")
+Rel(barFactory, jitUtils, "Uses JIT utilities")
+Rel(jitUtils, numba, "JIT compiles")
+Rel(vbtIndicators, numpy, "Array operations")
+Rel(vbtPortfolio, pandas, "DataFrame operations")
+
+@enduml

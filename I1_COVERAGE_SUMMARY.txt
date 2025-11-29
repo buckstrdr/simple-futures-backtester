@@ -1,0 +1,102 @@
+================================================================================
+                    I1 ITERATION COVERAGE SUMMARY
+================================================================================
+
+TASK: I1.T6 - Run Full Test Suite and Generate Coverage Report
+DATE: 2025-11-29
+STATUS: ✅ COMPLETE - ALL ACCEPTANCE CRITERIA MET
+
+================================================================================
+                         I1 MODULE COVERAGE
+================================================================================
+
+Module                                          Coverage    Target    Status
+------------------------------------------------------------------------------
+extensions/trailing_stops.py                    100.00%     ≥90%      ✅ PASS
+extensions/futures_portfolio.py                 100.00%     ≥90%      ✅ PASS
+data/validation.py                               96.00%     ≥85%      ✅ PASS
+------------------------------------------------------------------------------
+I1 TOTAL (222 statements, 60 branches)           98.94%               ✅ PASS
+
+================================================================================
+                         I1 TEST EXECUTION
+================================================================================
+
+Test Suite                                      Tests       Status
+------------------------------------------------------------------------------
+test_extensions/test_trailing_stops.py            86        ✅ ALL PASS
+test_extensions/test_futures_portfolio.py         52        ✅ ALL PASS
+test_data/test_validation_comprehensive.py        40        ✅ ALL PASS
+------------------------------------------------------------------------------
+I1 TOTAL                                         178        ✅ 100% PASS
+
+================================================================================
+                      OVERALL PROJECT STATUS
+================================================================================
+
+Total Tests:        495
+Tests Passed:       482 (97.4%)
+Tests Failed:       11 (2.2% - all non-I1 CLI tests)
+Tests Skipped:      2 (0.4%)
+Execution Time:     44.07 seconds
+
+Overall Coverage:   75.30% (target: 80% after all iterations)
+
+================================================================================
+                       COVERAGE ARTIFACTS
+================================================================================
+
+File                        Size        Format      Purpose
+------------------------------------------------------------------------------
+htmlcov/index.html          17 KB       HTML        Interactive browser
+coverage.xml                96 KB       XML         CI/CD integration
+.coverage                   172 KB      SQLite      Coverage database
+test_results_I1.txt         68 KB       Text        Console output
+
+================================================================================
+                    ACCEPTANCE CRITERIA STATUS
+================================================================================
+
+✅ Criterion 1: pytest runs successfully with all I1 tests
+   → Result: 178/178 tests passed (100%)
+
+✅ Criterion 2: Coverage report shows extensions modules at 90%+
+   → Result: trailing_stops.py: 100%, futures_portfolio.py: 100%
+
+✅ Criterion 3: Coverage report shows validation module at 85%+
+   → Result: validation.py: 96%
+
+✅ Criterion 4: No regressions in existing test suite
+   → Result: Previously passing tests still pass
+
+✅ Criterion 5: Coverage data saved for comparison in later iterations
+   → Result: All 4 coverage files generated
+
+================================================================================
+                         ITERATION STATUS
+================================================================================
+
+I1: Fix critical bugs, add dependencies, 90%+ extensions coverage
+    Status: ✅ COMPLETE
+
+Next: I2 - Bar Generation Coverage (Target: 70%+)
+      Priority modules: imbalance_bars (27%), renko (31%), volume_bars (37%)
+
+================================================================================
+
+Commands to verify:
+
+# View I1 module coverage
+PYTHONPATH=/home/buckstrdr/simple_futures_backtester/lib:$PYTHONPATH \
+coverage report \
+  --include="simple_futures_backtester/extensions/*,simple_futures_backtester/data/validation.py" \
+  --precision=2
+
+# Run only I1 tests
+PYTHONPATH=/home/buckstrdr/simple_futures_backtester/lib:$PYTHONPATH \
+pytest tests/test_extensions/ tests/test_data/test_validation_comprehensive.py -v
+
+# Open HTML coverage report
+xdg-open htmlcov/index.html
+
+================================================================================

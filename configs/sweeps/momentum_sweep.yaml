@@ -1,0 +1,56 @@
+# Momentum Strategy Parameter Sweep Configuration
+# Optimizes RSI and EMA parameters across a grid of values
+
+sweep:
+  strategy: momentum
+  parameters:
+    # RSI period sweep
+    rsi_period:
+      - 7
+      - 10
+      - 14
+      - 21
+
+    # RSI threshold sweep (paired values for overbought/oversold)
+    rsi_overbought:
+      - 65
+      - 70
+      - 75
+      - 80
+    rsi_oversold:
+      - 20
+      - 25
+      - 30
+      - 35
+
+    # EMA crossover sweep
+    fast_ema:
+      - 5
+      - 9
+      - 12
+    slow_ema:
+      - 15
+      - 21
+      - 26
+      - 50
+
+    # Trend strength threshold sweep
+    trend_strength_min:
+      - 0.01
+      - 0.02
+      - 0.03
+      - 0.05
+
+  backtest_overrides:
+    initial_capital: 100000
+    fees: 0.0001
+    slippage: 0.0001
+    size: 1
+
+backtest:
+  initial_capital: 100000
+  fees: 0.0001
+  slippage: 0.0001
+  size: 1
+  size_type: fixed
+  freq: 1D

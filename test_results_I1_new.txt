@@ -1,0 +1,778 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.3, pluggy-1.6.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/buckstrdr/simple_futures_backtester
+configfile: pyproject.toml
+plugins: cov-7.0.0, respx-0.22.0, anyio-4.11.0, asyncio-0.21.1, mock-3.15.1, Faker-37.11.0
+asyncio: mode=Mode.STRICT
+collecting ... collected 495 items
+
+tests/test_cli.py::TestVersionCommand::test_version_displays_version PASSED [  0%]
+tests/test_cli.py::TestVersionCommand::test_version_command_success PASSED [  0%]
+tests/test_cli.py::TestBacktestCommand::test_backtest_command_success FAILED [  0%]
+tests/test_cli.py::TestBacktestCommand::test_backtest_command_creates_output_files FAILED [  0%]
+tests/test_cli.py::TestBacktestCommand::test_backtest_command_with_config FAILED [  1%]
+tests/test_cli.py::TestBacktestCommand::test_backtest_command_with_overrides FAILED [  1%]
+tests/test_cli.py::TestBacktestCommand::test_backtest_command_missing_data_file PASSED [  1%]
+tests/test_cli.py::TestBacktestCommand::test_backtest_command_missing_config_file PASSED [  1%]
+tests/test_cli.py::TestBacktestCommand::test_backtest_command_invalid_strategy PASSED [  1%]
+tests/test_cli.py::TestBacktestCommand::test_backtest_command_with_parquet FAILED [  2%]
+tests/test_cli.py::TestSweepCommand::test_sweep_command_success FAILED   [  2%]
+tests/test_cli.py::TestSweepCommand::test_sweep_command_creates_results_csv FAILED [  2%]
+tests/test_cli.py::TestSweepCommand::test_sweep_command_missing_data_file PASSED [  2%]
+tests/test_cli.py::TestSweepCommand::test_sweep_command_missing_config_file PASSED [  2%]
+tests/test_cli.py::TestSweepCommand::test_sweep_command_invalid_strategy PASSED [  3%]
+tests/test_cli.py::TestSweepCommand::test_sweep_keyboard_interrupt PASSED [  3%]
+tests/test_cli.py::TestSweepCommand::test_sweep_command_with_n_jobs FAILED [  3%]
+tests/test_cli.py::TestGenerateBarsCommand::test_generate_bars_command_success PASSED [  3%]
+tests/test_cli.py::TestGenerateBarsCommand::test_generate_bars_command_verifies_csv_format PASSED [  3%]
+tests/test_cli.py::TestGenerateBarsCommand::test_generate_bars_command_tick_bars PASSED [  4%]
+tests/test_cli.py::TestGenerateBarsCommand::test_generate_bars_command_volume_bars PASSED [  4%]
+tests/test_cli.py::TestGenerateBarsCommand::test_generate_bars_command_dollar_bars PASSED [  4%]
+tests/test_cli.py::TestGenerateBarsCommand::test_generate_bars_command_missing_data_file PASSED [  4%]
+tests/test_cli.py::TestGenerateBarsCommand::test_generate_bars_command_invalid_bar_type PASSED [  4%]
+tests/test_cli.py::TestGenerateBarsCommand::test_generate_bars_command_invalid_param_value PASSED [  5%]
+tests/test_cli.py::TestGenerateBarsCommand::test_generate_bars_command_default_output PASSED [  5%]
+tests/test_cli.py::TestBenchmarkCommand::test_benchmark_command_success PASSED [  5%]
+tests/test_cli.py::TestBenchmarkCommand::test_benchmark_command_bars_suite PASSED [  5%]
+tests/test_cli.py::TestBenchmarkCommand::test_benchmark_command_backtest_suite PASSED [  5%]
+tests/test_cli.py::TestBenchmarkCommand::test_benchmark_command_indicators_suite PASSED [  6%]
+tests/test_cli.py::TestBenchmarkCommand::test_benchmark_command_invalid_suite PASSED [  6%]
+tests/test_cli.py::TestExportCommand::test_export_command_success PASSED [  6%]
+tests/test_cli.py::TestExportCommand::test_export_command_all_format PASSED [  6%]
+tests/test_cli.py::TestExportCommand::test_export_command_png_format PASSED [  6%]
+tests/test_cli.py::TestExportCommand::test_export_command_html_format PASSED [  7%]
+tests/test_cli.py::TestExportCommand::test_export_command_csv_format PASSED [  7%]
+tests/test_cli.py::TestExportCommand::test_export_command_missing_input_file PASSED [  7%]
+tests/test_cli.py::TestExportCommand::test_export_command_invalid_format PASSED [  7%]
+tests/test_cli.py::TestExportCommand::test_export_command_invalid_json PASSED [  7%]
+tests/test_cli.py::TestExportCommand::test_export_command_missing_required_keys PASSED [  8%]
+tests/test_cli.py::TestErrorHandling::test_invalid_data_exit_code PASSED [  8%]
+tests/test_cli.py::TestErrorHandling::test_missing_strategy_helpful_message PASSED [  8%]
+tests/test_cli.py::TestErrorHandling::test_backtest_data_validation_error PASSED [  8%]
+tests/test_cli.py::TestErrorHandling::test_sweep_data_validation_error PASSED [  8%]
+tests/test_cli.py::TestErrorHandling::test_generate_bars_data_validation_error PASSED [  9%]
+tests/test_cli.py::TestExceptionHandling::test_backtest_general_exception PASSED [  9%]
+tests/test_cli.py::TestExceptionHandling::test_sweep_value_error PASSED  [  9%]
+tests/test_cli.py::TestExceptionHandling::test_sweep_general_exception PASSED [  9%]
+tests/test_cli.py::TestExceptionHandling::test_generate_bars_general_exception PASSED [  9%]
+tests/test_cli.py::TestExceptionHandling::test_benchmark_general_exception PASSED [ 10%]
+tests/test_cli.py::TestExceptionHandling::test_export_permission_error PASSED [ 10%]
+tests/test_cli.py::TestExceptionHandling::test_export_key_error PASSED   [ 10%]
+tests/test_cli.py::TestExceptionHandling::test_export_general_exception PASSED [ 10%]
+tests/test_cli.py::TestMoreExceptionPaths::test_sweep_file_not_found PASSED [ 10%]
+tests/test_cli.py::TestMoreExceptionPaths::test_sweep_value_error_in_config PASSED [ 11%]
+tests/test_cli.py::TestMoreExceptionPaths::test_sweep_key_error_invalid_strategy PASSED [ 11%]
+tests/test_cli.py::TestMoreExceptionPaths::test_generate_bars_file_not_found PASSED [ 11%]
+tests/test_cli.py::TestMoreExceptionPaths::test_generate_bars_key_error PASSED [ 11%]
+tests/test_cli.py::TestMoreExceptionPaths::test_generate_bars_value_error PASSED [ 11%]
+tests/test_cli.py::TestMoreExceptionPaths::test_benchmark_keyboard_interrupt PASSED [ 12%]
+tests/test_cli.py::TestMoreExceptionPaths::test_benchmark_stderr_error PASSED [ 12%]
+tests/test_cli.py::TestMoreExceptionPaths::test_benchmark_no_results_parsed PASSED [ 12%]
+tests/test_cli.py::TestMoreExceptionPaths::test_export_file_not_found PASSED [ 12%]
+tests/test_cli.py::TestSweepEdgeCases::test_sweep_with_strategy_override FAILED [ 12%]
+tests/test_cli.py::TestSweepEdgeCases::test_sweep_empty_parameters PASSED [ 13%]
+tests/test_cli.py::TestImbalanceBars::test_generate_tick_imbalance_bars PASSED [ 13%]
+tests/test_cli.py::TestImbalanceBars::test_generate_volume_imbalance_bars PASSED [ 13%]
+tests/test_cli.py::TestAdditionalCoverage::test_backtest_unknown_strategy_no_available PASSED [ 13%]
+tests/test_cli.py::TestAdditionalCoverage::test_backtest_key_error_shows_available PASSED [ 13%]
+tests/test_cli.py::TestAdditionalCoverage::test_benchmark_no_benchmarks_message PASSED [ 14%]
+tests/test_cli.py::TestAdditionalCoverage::test_backtest_file_not_found_exception PASSED [ 14%]
+tests/test_cli.py::TestAdditionalCoverage::test_sweep_strategy_key_error_shows_available PASSED [ 14%]
+tests/test_cli.py::TestAdditionalCoverage::test_generate_bars_key_error_shows_available PASSED [ 14%]
+tests/test_cli.py::TestAdditionalCoverage::test_benchmark_failed_targets PASSED [ 14%]
+tests/test_cli.py::TestCLIHelp::test_main_help PASSED                    [ 15%]
+tests/test_cli.py::TestCLIHelp::test_backtest_help PASSED                [ 15%]
+tests/test_cli.py::TestCLIHelp::test_sweep_help PASSED                   [ 15%]
+tests/test_cli.py::TestCLIHelp::test_generate_bars_help PASSED           [ 15%]
+tests/test_cli.py::TestCLIHelp::test_benchmark_help PASSED               [ 15%]
+tests/test_cli.py::TestCLIHelp::test_export_help PASSED                  [ 16%]
+tests/test_cli.py::TestParquetInputCoverage::test_sweep_with_parquet_input FAILED [ 16%]
+tests/test_cli.py::TestParquetInputCoverage::test_generate_bars_with_parquet_input PASSED [ 16%]
+tests/test_cli.py::TestBacktestWithOutputSuccess::test_backtest_output_export_success_message FAILED [ 16%]
+tests/test_cli.py::TestExportWarningsAndEdgeCases::test_export_non_json_file_warning PASSED [ 16%]
+tests/test_cli.py::TestExportWarningsAndEdgeCases::test_export_with_empty_trades PASSED [ 17%]
+tests/test_cli.py::TestBacktestKeyErrorPath::test_backtest_key_error_in_generate_signals PASSED [ 17%]
+tests/test_cli.py::TestSweepAdditionalPaths::test_sweep_key_error_during_run PASSED [ 17%]
+tests/test_cli.py::TestGenerateBarsAdditionalPaths::test_generate_bars_unmapped_bar_type PASSED [ 17%]
+tests/test_cli.py::TestBenchmarkAdditionalPaths::test_benchmark_results_with_partial_pass PASSED [ 17%]
+tests/test_bars/test_dollar_bars.py::TestDollarRegistration::test_dollar_registered PASSED [ 18%]
+tests/test_bars/test_dollar_bars.py::TestDollarRegistration::test_get_dollar_generator PASSED [ 18%]
+tests/test_bars/test_dollar_bars.py::TestDollarBasicFunctionality::test_simple_dollar_bars PASSED [ 18%]
+tests/test_bars/test_dollar_bars.py::TestDollarBasicFunctionality::test_high_dollar_volume_many_bars PASSED [ 18%]
+tests/test_bars/test_dollar_bars.py::TestDollarBasicFunctionality::test_low_dollar_volume_few_bars PASSED [ 18%]
+tests/test_bars/test_dollar_bars.py::TestDollarBasicFunctionality::test_volume_aggregation PASSED [ 19%]
+tests/test_bars/test_dollar_bars.py::TestDollarBasicFunctionality::test_index_map_tracking PASSED [ 19%]
+tests/test_bars/test_dollar_bars.py::TestDollarAlgorithmCorrectness::test_dollar_volume_calculation PASSED [ 19%]
+tests/test_bars/test_dollar_bars.py::TestDollarAlgorithmCorrectness::test_bar_reset_after_close PASSED [ 19%]
+tests/test_bars/test_dollar_bars.py::TestDollarAlgorithmCorrectness::test_ohlc_tracking PASSED [ 20%]
+tests/test_bars/test_dollar_bars.py::TestDollarAlgorithmCorrectness::test_price_sensitivity PASSED [ 20%]
+tests/test_bars/test_dollar_bars.py::TestDollarEdgeCases::test_empty_input PASSED [ 20%]
+tests/test_bars/test_dollar_bars.py::TestDollarEdgeCases::test_single_row PASSED [ 20%]
+tests/test_bars/test_dollar_bars.py::TestDollarEdgeCases::test_invalid_threshold_zero PASSED [ 20%]
+tests/test_bars/test_dollar_bars.py::TestDollarEdgeCases::test_invalid_threshold_negative PASSED [ 21%]
+tests/test_bars/test_dollar_bars.py::TestDollarEdgeCases::test_inconsistent_array_lengths PASSED [ 21%]
+tests/test_bars/test_dollar_bars.py::TestDollarOutputValidation::test_output_dtypes PASSED [ 21%]
+tests/test_bars/test_dollar_bars.py::TestDollarOutputValidation::test_output_contiguity PASSED [ 21%]
+tests/test_bars/test_dollar_bars.py::TestDollarOutputValidation::test_consistent_lengths PASSED [ 21%]
+tests/test_bars/test_dollar_bars.py::TestDollarPerformance::test_1m_rows_performance SKIPPED [ 22%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceRegistration::test_tick_imbalance_registered PASSED [ 22%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceRegistration::test_volume_imbalance_registered PASSED [ 22%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceRegistration::test_get_tick_imbalance_generator PASSED [ 22%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceRegistration::test_get_volume_imbalance_generator PASSED [ 22%]
+tests/test_bars/test_imbalance_bars.py::TestTickImbalanceBasicFunctionality::test_simple_tick_imbalance_bars PASSED [ 23%]
+tests/test_bars/test_imbalance_bars.py::TestTickImbalanceBasicFunctionality::test_strong_uptrend_creates_bars PASSED [ 23%]
+tests/test_bars/test_imbalance_bars.py::TestTickImbalanceBasicFunctionality::test_strong_downtrend_creates_bars PASSED [ 23%]
+tests/test_bars/test_imbalance_bars.py::TestTickImbalanceBasicFunctionality::test_choppy_market_few_bars PASSED [ 23%]
+tests/test_bars/test_imbalance_bars.py::TestTickImbalanceAlgorithmCorrectness::test_tick_direction_uptick PASSED [ 23%]
+tests/test_bars/test_imbalance_bars.py::TestTickImbalanceAlgorithmCorrectness::test_tick_direction_downtick PASSED [ 24%]
+tests/test_bars/test_imbalance_bars.py::TestTickImbalanceAlgorithmCorrectness::test_tick_direction_no_change PASSED [ 24%]
+tests/test_bars/test_imbalance_bars.py::TestTickImbalanceAlgorithmCorrectness::test_absolute_threshold_positive PASSED [ 24%]
+tests/test_bars/test_imbalance_bars.py::TestTickImbalanceAlgorithmCorrectness::test_absolute_threshold_negative PASSED [ 24%]
+tests/test_bars/test_imbalance_bars.py::TestTickImbalanceAlgorithmCorrectness::test_imbalance_reset_after_bar PASSED [ 24%]
+tests/test_bars/test_imbalance_bars.py::TestVolumeImbalanceBasicFunctionality::test_simple_volume_imbalance_bars PASSED [ 25%]
+tests/test_bars/test_imbalance_bars.py::TestVolumeImbalanceBasicFunctionality::test_high_volume_uptrend PASSED [ 25%]
+tests/test_bars/test_imbalance_bars.py::TestVolumeImbalanceBasicFunctionality::test_low_volume_few_bars PASSED [ 25%]
+tests/test_bars/test_imbalance_bars.py::TestVolumeImbalanceAlgorithmCorrectness::test_volume_weighted_accumulation_positive PASSED [ 25%]
+tests/test_bars/test_imbalance_bars.py::TestVolumeImbalanceAlgorithmCorrectness::test_volume_weighted_accumulation_negative PASSED [ 25%]
+tests/test_bars/test_imbalance_bars.py::TestVolumeImbalanceAlgorithmCorrectness::test_mixed_direction_with_volume PASSED [ 26%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceEdgeCases::test_empty_input_tick PASSED [ 26%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceEdgeCases::test_empty_input_volume PASSED [ 26%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceEdgeCases::test_single_row_tick PASSED [ 26%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceEdgeCases::test_single_row_volume PASSED [ 26%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceEdgeCases::test_invalid_threshold_zero_tick PASSED [ 27%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceEdgeCases::test_invalid_threshold_zero_volume PASSED [ 27%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceEdgeCases::test_invalid_threshold_negative_tick PASSED [ 27%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceEdgeCases::test_invalid_threshold_negative_volume PASSED [ 27%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceOutputValidation::test_output_dtypes_tick PASSED [ 27%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceOutputValidation::test_output_dtypes_volume PASSED [ 28%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceOutputValidation::test_output_contiguity_tick PASSED [ 28%]
+tests/test_bars/test_imbalance_bars.py::TestImbalanceOutputValidation::test_output_contiguity_volume PASSED [ 28%]
+tests/test_bars/test_range_bars.py::TestRangeRegistration::test_range_registered PASSED [ 28%]
+tests/test_bars/test_range_bars.py::TestRangeRegistration::test_get_range_generator PASSED [ 28%]
+tests/test_bars/test_range_bars.py::TestRangeBasicFunctionality::test_simple_range_bars PASSED [ 29%]
+tests/test_bars/test_range_bars.py::TestRangeBasicFunctionality::test_high_volatility_many_bars PASSED [ 29%]
+tests/test_bars/test_range_bars.py::TestRangeBasicFunctionality::test_low_volatility_few_bars PASSED [ 29%]
+tests/test_bars/test_range_bars.py::TestRangeBasicFunctionality::test_volume_aggregation PASSED [ 29%]
+tests/test_bars/test_range_bars.py::TestRangeBasicFunctionality::test_index_map_tracking PASSED [ 29%]
+tests/test_bars/test_range_bars.py::TestRangeAlgorithmCorrectness::test_cumulative_high_low_tracking PASSED [ 30%]
+tests/test_bars/test_range_bars.py::TestRangeAlgorithmCorrectness::test_bar_reset_after_close PASSED [ 30%]
+tests/test_bars/test_range_bars.py::TestRangeEdgeCases::test_empty_input PASSED [ 30%]
+tests/test_bars/test_range_bars.py::TestRangeEdgeCases::test_single_row PASSED [ 30%]
+tests/test_bars/test_range_bars.py::TestRangeEdgeCases::test_invalid_range_size_zero PASSED [ 30%]
+tests/test_bars/test_range_bars.py::TestRangeEdgeCases::test_invalid_range_size_negative PASSED [ 31%]
+tests/test_bars/test_range_bars.py::TestRangeEdgeCases::test_inconsistent_array_lengths PASSED [ 31%]
+tests/test_bars/test_range_bars.py::TestRangeOutputValidation::test_output_dtypes PASSED [ 31%]
+tests/test_bars/test_range_bars.py::TestRangeOutputValidation::test_output_contiguity PASSED [ 31%]
+tests/test_bars/test_range_bars.py::TestRangeOutputValidation::test_consistent_lengths PASSED [ 31%]
+tests/test_bars/test_range_bars.py::TestRangeVolumeAggregation::test_volume_first_bar_exact PASSED [ 32%]
+tests/test_bars/test_range_bars.py::TestRangeVolumeAggregation::test_volume_subsequent_bars_exact PASSED [ 32%]
+tests/test_bars/test_range_bars.py::TestRangeVolumeAggregation::test_volume_total_conservation PASSED [ 32%]
+tests/test_bars/test_range_bars.py::TestRangeVolumeAggregation::test_volume_single_bar_entire_array PASSED [ 32%]
+tests/test_bars/test_range_bars.py::TestRangeBarReset::test_new_bar_starts_from_previous_close PASSED [ 32%]
+tests/test_bars/test_range_bars.py::TestRangeBarReset::test_high_low_reset_to_current_values PASSED [ 33%]
+tests/test_bars/test_range_bars.py::TestRangeBarReset::test_multiple_bars_continuity PASSED [ 33%]
+tests/test_bars/test_range_bars.py::TestRangeBoundaryConditions::test_exact_threshold_closes_bar PASSED [ 33%]
+tests/test_bars/test_range_bars.py::TestRangeBoundaryConditions::test_below_threshold_no_close PASSED [ 33%]
+tests/test_bars/test_range_bars.py::TestRangeBoundaryConditions::test_above_threshold_closes_immediately PASSED [ 33%]
+tests/test_bars/test_range_bars.py::TestRangeBoundaryConditions::test_large_gap_single_bar PASSED [ 34%]
+tests/test_bars/test_range_bars.py::TestRangeBoundaryConditions::test_narrow_range_accumulation PASSED [ 34%]
+tests/test_bars/test_range_bars.py::TestRangePerformance::test_throughput_1m_rows_manual PASSED [ 34%]
+tests/test_bars/test_renko.py::TestRenkoRegistration::test_renko_registered PASSED [ 34%]
+tests/test_bars/test_renko.py::TestRenkoRegistration::test_get_renko_generator PASSED [ 34%]
+tests/test_bars/test_renko.py::TestRenkoBasicFunctionality::test_fixed_brick_size_uptrend PASSED [ 35%]
+tests/test_bars/test_renko.py::TestRenkoBasicFunctionality::test_fixed_brick_size_downtrend PASSED [ 35%]
+tests/test_bars/test_renko.py::TestRenkoBasicFunctionality::test_multiple_bricks_single_tick PASSED [ 35%]
+tests/test_bars/test_renko.py::TestRenkoBasicFunctionality::test_volume_aggregation PASSED [ 35%]
+tests/test_bars/test_renko.py::TestRenkoBasicFunctionality::test_index_map_tracking PASSED [ 35%]
+tests/test_bars/test_renko.py::TestRenkoReversalRule::test_uptrend_to_downtrend_reversal PASSED [ 36%]
+tests/test_bars/test_renko.py::TestRenkoReversalRule::test_downtrend_to_uptrend_reversal PASSED [ 36%]
+tests/test_bars/test_renko.py::TestRenkoReversalRule::test_no_reversal_below_threshold PASSED [ 36%]
+tests/test_bars/test_renko.py::TestRenkoATRDynamicSizing::test_atr_based_sizing PASSED [ 36%]
+tests/test_bars/test_renko.py::TestRenkoATRDynamicSizing::test_fixed_size_before_atr_warmup PASSED [ 36%]
+tests/test_bars/test_renko.py::TestRenkoEdgeCases::test_empty_data_returns_empty_barseries PASSED [ 37%]
+tests/test_bars/test_renko.py::TestRenkoEdgeCases::test_single_row_returns_empty_barseries PASSED [ 37%]
+tests/test_bars/test_renko.py::TestRenkoEdgeCases::test_identical_prices_returns_empty PASSED [ 37%]
+tests/test_bars/test_renko.py::TestRenkoEdgeCases::test_no_brick_size_raises_error PASSED [ 37%]
+tests/test_bars/test_renko.py::TestRenkoEdgeCases::test_negative_brick_size_raises_error PASSED [ 37%]
+tests/test_bars/test_renko.py::TestRenkoEdgeCases::test_zero_brick_size_raises_error PASSED [ 38%]
+tests/test_bars/test_renko.py::TestRenkoEdgeCases::test_inconsistent_array_lengths_raises_error PASSED [ 38%]
+tests/test_bars/test_renko.py::TestRenkoOutputValidation::test_ohlc_arrays_are_float64 PASSED [ 38%]
+tests/test_bars/test_renko.py::TestRenkoOutputValidation::test_volume_and_index_arrays_are_int64 PASSED [ 38%]
+tests/test_bars/test_renko.py::TestRenkoOutputValidation::test_arrays_are_c_contiguous PASSED [ 38%]
+tests/test_bars/test_renko.py::TestRenkoOutputValidation::test_all_arrays_same_length PASSED [ 39%]
+tests/test_bars/test_renko.py::TestRenkoOutputValidation::test_bar_indices_monotonically_increasing PASSED [ 39%]
+tests/test_bars/test_renko.py::TestRenkoWithFixture::test_realistic_data PASSED [ 39%]
+tests/test_bars/test_renko.py::TestRenkoReversalBoundaries::test_reversal_at_exact_2x_boundary_up_to_down PASSED [ 39%]
+tests/test_bars/test_renko.py::TestRenkoReversalBoundaries::test_reversal_at_exact_2x_boundary_down_to_up PASSED [ 40%]
+tests/test_bars/test_renko.py::TestRenkoReversalBoundaries::test_reversal_just_below_2x_threshold PASSED [ 40%]
+tests/test_bars/test_renko.py::TestRenkoReversalBoundaries::test_multiple_reversals_in_sequence PASSED [ 40%]
+tests/test_bars/test_renko.py::TestRenkoATREdgeCases::test_atr_transition_at_exact_length PASSED [ 40%]
+tests/test_bars/test_renko.py::TestRenkoATREdgeCases::test_atr_very_small_value PASSED [ 40%]
+tests/test_bars/test_renko.py::TestRenkoATREdgeCases::test_atr_without_brick_size PASSED [ 41%]
+tests/test_bars/test_renko.py::TestRenkoATREdgeCases::test_atr_changing_during_generation PASSED [ 41%]
+tests/test_bars/test_renko.py::TestRenkoLargeGaps::test_10_bricks_in_single_tick_upward PASSED [ 41%]
+tests/test_bars/test_renko.py::TestRenkoLargeGaps::test_10_bricks_in_single_tick_downward PASSED [ 41%]
+tests/test_bars/test_renko.py::TestRenkoLargeGaps::test_large_gap_volume_aggregation PASSED [ 41%]
+tests/test_bars/test_renko.py::TestRenkoMixedScenarios::test_up_trend_reversal_down_continuation PASSED [ 42%]
+tests/test_bars/test_renko.py::TestRenkoMixedScenarios::test_down_trend_reversal_up_continuation PASSED [ 42%]
+tests/test_bars/test_renko.py::TestRenkoMixedScenarios::test_neutral_to_down_first_brick PASSED [ 42%]
+tests/test_bars/test_renko.py::TestRenkoVolumeEdgeCases::test_first_bar_volume_from_start PASSED [ 42%]
+tests/test_bars/test_renko.py::TestRenkoVolumeEdgeCases::test_subsequent_bars_volume_ranges PASSED [ 42%]
+tests/test_bars/test_renko.py::TestRenkoVolumeEdgeCases::test_empty_bars_zero_volume PASSED [ 43%]
+tests/test_bars/test_renko.py::TestRenkoDownContinuation::test_continue_down_after_down_brick PASSED [ 43%]
+tests/test_bars/test_renko.py::TestRenkoDownContinuation::test_down_continuation_with_small_upticks PASSED [ 43%]
+tests/test_bars/test_renko.py::TestRenkoPerformance::test_throughput_1m_rows PASSED [ 43%]
+tests/test_bars/test_tick_bars.py::TestTickRegistration::test_tick_registered PASSED [ 43%]
+tests/test_bars/test_tick_bars.py::TestTickRegistration::test_get_tick_generator PASSED [ 44%]
+tests/test_bars/test_tick_bars.py::TestTickBasicFunctionality::test_exact_division PASSED [ 44%]
+tests/test_bars/test_tick_bars.py::TestTickBasicFunctionality::test_partial_final_bar PASSED [ 44%]
+tests/test_bars/test_tick_bars.py::TestTickBasicFunctionality::test_tick_threshold_equals_n PASSED [ 44%]
+tests/test_bars/test_tick_bars.py::TestTickBasicFunctionality::test_tick_threshold_greater_than_n PASSED [ 44%]
+tests/test_bars/test_tick_bars.py::TestTickBasicFunctionality::test_volume_aggregation PASSED [ 45%]
+tests/test_bars/test_tick_bars.py::TestTickBasicFunctionality::test_index_map_tracking PASSED [ 45%]
+tests/test_bars/test_tick_bars.py::TestTickAlgorithmCorrectness::test_ohlc_aggregation_correctness PASSED [ 45%]
+tests/test_bars/test_tick_bars.py::TestTickAlgorithmCorrectness::test_tick_threshold_one PASSED [ 45%]
+tests/test_bars/test_tick_bars.py::TestTickAlgorithmCorrectness::test_ohlc_aggregation_with_tick_threshold_2 PASSED [ 45%]
+tests/test_bars/test_tick_bars.py::TestTickAlgorithmCorrectness::test_ohlc_aggregation_with_tick_threshold_5 PASSED [ 46%]
+tests/test_bars/test_tick_bars.py::TestTickAlgorithmCorrectness::test_bar_indices_monotonicity PASSED [ 46%]
+tests/test_bars/test_tick_bars.py::TestTickAlgorithmCorrectness::test_bar_indices_correctness PASSED [ 46%]
+tests/test_bars/test_tick_bars.py::TestTickEdgeCases::test_empty_input PASSED [ 46%]
+tests/test_bars/test_tick_bars.py::TestTickEdgeCases::test_single_row PASSED [ 46%]
+tests/test_bars/test_tick_bars.py::TestTickEdgeCases::test_invalid_tick_threshold_zero PASSED [ 47%]
+tests/test_bars/test_tick_bars.py::TestTickEdgeCases::test_invalid_tick_threshold_negative PASSED [ 47%]
+tests/test_bars/test_tick_bars.py::TestTickEdgeCases::test_inconsistent_array_lengths PASSED [ 47%]
+tests/test_bars/test_tick_bars.py::TestTickEdgeCases::test_very_large_tick_threshold PASSED [ 47%]
+tests/test_bars/test_tick_bars.py::TestTickEdgeCases::test_varying_volume_patterns PASSED [ 47%]
+tests/test_bars/test_tick_bars.py::TestTickEdgeCases::test_zero_volume_pattern PASSED [ 48%]
+tests/test_bars/test_tick_bars.py::TestTickOutputValidation::test_output_dtypes PASSED [ 48%]
+tests/test_bars/test_tick_bars.py::TestTickOutputValidation::test_output_contiguity PASSED [ 48%]
+tests/test_bars/test_tick_bars.py::TestTickOutputValidation::test_consistent_lengths PASSED [ 48%]
+tests/test_bars/test_tick_bars.py::TestTickPerformance::test_1m_rows_performance PASSED [ 48%]
+tests/test_bars/test_volume_bars.py::TestVolumeRegistration::test_volume_registered PASSED [ 49%]
+tests/test_bars/test_volume_bars.py::TestVolumeRegistration::test_get_volume_generator PASSED [ 49%]
+tests/test_bars/test_volume_bars.py::TestVolumeBasicFunctionality::test_simple_volume_bars PASSED [ 49%]
+tests/test_bars/test_volume_bars.py::TestVolumeBasicFunctionality::test_high_volume_many_bars PASSED [ 49%]
+tests/test_bars/test_volume_bars.py::TestVolumeBasicFunctionality::test_low_volume_few_bars PASSED [ 49%]
+tests/test_bars/test_volume_bars.py::TestVolumeBasicFunctionality::test_cumulative_volume_per_bar PASSED [ 50%]
+tests/test_bars/test_volume_bars.py::TestVolumeBasicFunctionality::test_index_map_tracking PASSED [ 50%]
+tests/test_bars/test_volume_bars.py::TestVolumeAlgorithmCorrectness::test_volume_accumulation PASSED [ 50%]
+tests/test_bars/test_volume_bars.py::TestVolumeAlgorithmCorrectness::test_bar_reset_after_close PASSED [ 50%]
+tests/test_bars/test_volume_bars.py::TestVolumeAlgorithmCorrectness::test_ohlc_tracking PASSED [ 50%]
+tests/test_bars/test_volume_bars.py::TestVolumeEdgeCases::test_empty_input PASSED [ 51%]
+tests/test_bars/test_volume_bars.py::TestVolumeEdgeCases::test_single_row PASSED [ 51%]
+tests/test_bars/test_volume_bars.py::TestVolumeEdgeCases::test_invalid_threshold_zero PASSED [ 51%]
+tests/test_bars/test_volume_bars.py::TestVolumeEdgeCases::test_invalid_threshold_negative PASSED [ 51%]
+tests/test_bars/test_volume_bars.py::TestVolumeEdgeCases::test_inconsistent_array_lengths PASSED [ 51%]
+tests/test_bars/test_volume_bars.py::TestVolumeOutputValidation::test_output_dtypes PASSED [ 52%]
+tests/test_bars/test_volume_bars.py::TestVolumeOutputValidation::test_output_contiguity PASSED [ 52%]
+tests/test_bars/test_volume_bars.py::TestVolumeOutputValidation::test_consistent_lengths PASSED [ 52%]
+tests/test_bars/test_volume_bars.py::TestVolumePerformance::test_1m_rows_performance SKIPPED [ 52%]
+tests/test_data/test_validation_comprehensive.py::TestDataValidationError::test_exception_attributes PASSED [ 52%]
+tests/test_data/test_validation_comprehensive.py::TestDataValidationError::test_exception_message_format PASSED [ 53%]
+tests/test_data/test_validation_comprehensive.py::TestCheckNanValues::test_nan_in_column_raises_error[datetime] PASSED [ 53%]
+tests/test_data/test_validation_comprehensive.py::TestCheckNanValues::test_nan_in_column_raises_error[open] PASSED [ 53%]
+tests/test_data/test_validation_comprehensive.py::TestCheckNanValues::test_nan_in_column_raises_error[high] PASSED [ 53%]
+tests/test_data/test_validation_comprehensive.py::TestCheckNanValues::test_nan_in_column_raises_error[low] PASSED [ 53%]
+tests/test_data/test_validation_comprehensive.py::TestCheckNanValues::test_nan_in_column_raises_error[close] PASSED [ 54%]
+tests/test_data/test_validation_comprehensive.py::TestCheckNanValues::test_first_nan_row_reported PASSED [ 54%]
+tests/test_data/test_validation_comprehensive.py::TestCheckNanValues::test_all_valid_passes PASSED [ 54%]
+tests/test_data/test_validation_comprehensive.py::TestCheckNanValues::test_nan_in_datetime_column_first PASSED [ 54%]
+tests/test_data/test_validation_comprehensive.py::TestCheckTimestampMonotonicity::test_duplicate_timestamps_fail PASSED [ 54%]
+tests/test_data/test_validation_comprehensive.py::TestCheckTimestampMonotonicity::test_backwards_timestamps_fail PASSED [ 55%]
+tests/test_data/test_validation_comprehensive.py::TestCheckTimestampMonotonicity::test_single_row_passes PASSED [ 55%]
+tests/test_data/test_validation_comprehensive.py::TestCheckTimestampMonotonicity::test_strictly_increasing_passes PASSED [ 55%]
+tests/test_data/test_validation_comprehensive.py::TestCheckOhlcBounds::test_high_less_than_open_fails PASSED [ 55%]
+tests/test_data/test_validation_comprehensive.py::TestCheckOhlcBounds::test_high_less_than_close_fails PASSED [ 55%]
+tests/test_data/test_validation_comprehensive.py::TestCheckOhlcBounds::test_low_greater_than_open_fails PASSED [ 56%]
+tests/test_data/test_validation_comprehensive.py::TestCheckOhlcBounds::test_low_greater_than_close_fails PASSED [ 56%]
+tests/test_data/test_validation_comprehensive.py::TestCheckOhlcBounds::test_high_less_than_low_fails PASSED [ 56%]
+tests/test_data/test_validation_comprehensive.py::TestCheckOhlcBounds::test_valid_ohlc_relationships_pass PASSED [ 56%]
+tests/test_data/test_validation_comprehensive.py::TestCheckOhlcBounds::test_ohlc_all_equal_passes PASSED [ 56%]
+tests/test_data/test_validation_comprehensive.py::TestCheckVolumeNonNegative::test_negative_volume_fails PASSED [ 57%]
+tests/test_data/test_validation_comprehensive.py::TestCheckVolumeNonNegative::test_zero_volume_passes PASSED [ 57%]
+tests/test_data/test_validation_comprehensive.py::TestCheckVolumeNonNegative::test_positive_volume_passes PASSED [ 57%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataIntegration::test_all_valid_data_passes PASSED [ 57%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataIntegration::test_validation_order_nan_first PASSED [ 57%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataIntegration::test_validation_order_timestamp_second PASSED [ 58%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataIntegration::test_validation_order_ohlc_third PASSED [ 58%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataIntegration::test_validation_order_volume_last PASSED [ 58%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataIntegration::test_returns_same_dataframe PASSED [ 58%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataEdgeCases::test_error_message_clarity_nan PASSED [ 58%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataEdgeCases::test_error_message_clarity_timestamp PASSED [ 59%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataEdgeCases::test_error_message_clarity_ohlc PASSED [ 59%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataEdgeCases::test_fail_fast_behavior PASSED [ 59%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataEdgeCases::test_empty_dataframe_handling PASSED [ 59%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataEdgeCases::test_single_row_handling PASSED [ 60%]
+tests/test_data/test_validation_comprehensive.py::TestValidateDataEdgeCases::test_single_row_with_invalid_ohlc_fails PASSED [ 60%]
+tests/test_extensions/test_futures_portfolio.py::TestFuturesPortfolioInitialization::test_valid_initialization PASSED [ 60%]
+tests/test_extensions/test_futures_portfolio.py::TestFuturesPortfolioInitialization::test_point_value_validation_raises_error_on_zero PASSED [ 60%]
+tests/test_extensions/test_futures_portfolio.py::TestFuturesPortfolioInitialization::test_point_value_validation_raises_error_on_negative PASSED [ 60%]
+tests/test_extensions/test_futures_portfolio.py::TestFuturesPortfolioInitialization::test_tick_size_validation_raises_error_on_zero PASSED [ 61%]
+tests/test_extensions/test_futures_portfolio.py::TestFuturesPortfolioInitialization::test_tick_size_validation_raises_error_on_negative PASSED [ 61%]
+tests/test_extensions/test_futures_portfolio.py::TestFuturesPortfolioInitialization::test_properties_accessible PASSED [ 61%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_total_pnl_multiplied_by_point_value[1.0] PASSED [ 61%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_total_pnl_multiplied_by_point_value[2.0] PASSED [ 61%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_total_pnl_multiplied_by_point_value[50.0] PASSED [ 62%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_avg_trade_pnl_multiplied[1.0] PASSED [ 62%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_avg_trade_pnl_multiplied[2.0] PASSED [ 62%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_avg_trade_pnl_multiplied[50.0] PASSED [ 62%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_max_drawdown_dollars_multiplied[1.0] PASSED [ 62%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_max_drawdown_dollars_multiplied[2.0] PASSED [ 63%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_max_drawdown_dollars_multiplied[50.0] PASSED [ 63%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_ratio_metrics_not_multiplied[1.0] PASSED [ 63%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_ratio_metrics_not_multiplied[2.0] PASSED [ 63%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_ratio_metrics_not_multiplied[50.0] PASSED [ 63%]
+tests/test_extensions/test_futures_portfolio.py::TestPointValueApplication::test_percentage_metrics_preserved PASSED [ 64%]
+tests/test_extensions/test_futures_portfolio.py::TestGetAnalytics::test_analytics_dataclass_returned PASSED [ 64%]
+tests/test_extensions/test_futures_portfolio.py::TestGetAnalytics::test_all_fields_populated PASSED [ 64%]
+tests/test_extensions/test_futures_portfolio.py::TestGetAnalytics::test_dollar_metrics_vs_price_metrics PASSED [ 64%]
+tests/test_extensions/test_futures_portfolio.py::TestGetAnalytics::test_fallback_logic_for_win_count PASSED [ 64%]
+tests/test_extensions/test_futures_portfolio.py::TestEdgeCases::test_zero_trades_returns_defaults PASSED [ 65%]
+tests/test_extensions/test_futures_portfolio.py::TestEdgeCases::test_nan_values_handled PASSED [ 65%]
+tests/test_extensions/test_futures_portfolio.py::TestEdgeCases::test_none_values_handled PASSED [ 65%]
+tests/test_extensions/test_futures_portfolio.py::TestEdgeCases::test_infinity_values_handled PASSED [ 65%]
+tests/test_extensions/test_futures_portfolio.py::TestEdgeCases::test_all_winning_trades PASSED [ 65%]
+tests/test_extensions/test_futures_portfolio.py::TestEdgeCases::test_all_losing_trades PASSED [ 66%]
+tests/test_extensions/test_futures_portfolio.py::TestEdgeCases::test_no_returns_acc_attribute PASSED [ 66%]
+tests/test_extensions/test_futures_portfolio.py::TestEdgeCases::test_no_drawdowns_attribute PASSED [ 66%]
+tests/test_extensions/test_futures_portfolio.py::TestEdgeCases::test_minimal_portfolio_missing_attributes PASSED [ 66%]
+tests/test_extensions/test_futures_portfolio.py::TestEquityAndDrawdownCurves::test_get_equity_curve_multiplies_by_point_value PASSED [ 66%]
+tests/test_extensions/test_futures_portfolio.py::TestEquityAndDrawdownCurves::test_get_equity_curve_with_numpy_array PASSED [ 67%]
+tests/test_extensions/test_futures_portfolio.py::TestEquityAndDrawdownCurves::test_get_drawdown_curve_returns_decimals PASSED [ 67%]
+tests/test_extensions/test_futures_portfolio.py::TestEquityAndDrawdownCurves::test_get_drawdown_curve_with_ndarray_input PASSED [ 67%]
+tests/test_extensions/test_futures_portfolio.py::TestEquityAndDrawdownCurves::test_equity_curve_shape_matches_portfolio PASSED [ 67%]
+tests/test_extensions/test_futures_portfolio.py::TestFormatPrice::test_format_price_rounds_to_tick[4500.13-0.25-4500.25] PASSED [ 67%]
+tests/test_extensions/test_futures_portfolio.py::TestFormatPrice::test_format_price_rounds_to_tick[4500.12-0.25-4500.0] PASSED [ 68%]
+tests/test_extensions/test_futures_portfolio.py::TestFormatPrice::test_format_price_rounds_to_tick[100.567-0.01-100.57] PASSED [ 68%]
+tests/test_extensions/test_futures_portfolio.py::TestFormatPrice::test_format_price_rounds_to_tick[100.563-0.01-100.56] PASSED [ 68%]
+tests/test_extensions/test_futures_portfolio.py::TestFormatPrice::test_format_price_rounds_to_tick[1234.6-1.0-1235.0] PASSED [ 68%]
+tests/test_extensions/test_futures_portfolio.py::TestFormatPrice::test_format_price_rounds_to_tick[1234.4-1.0-1234.0] PASSED [ 68%]
+tests/test_extensions/test_futures_portfolio.py::TestFormatPrice::test_format_price_rounds_to_tick[4500.0-0.25-4500.0] PASSED [ 69%]
+tests/test_extensions/test_futures_portfolio.py::TestFormatPrice::test_format_price_rounds_to_tick[100.5-0.01-100.5] PASSED [ 69%]
+tests/test_extensions/test_futures_portfolio.py::TestFormatPrice::test_format_price_does_not_affect_calculations PASSED [ 69%]
+tests/test_extensions/test_futures_portfolio.py::TestSafeFloat::test_safe_float_with_none PASSED [ 69%]
+tests/test_extensions/test_futures_portfolio.py::TestSafeFloat::test_safe_float_with_nan PASSED [ 69%]
+tests/test_extensions/test_futures_portfolio.py::TestSafeFloat::test_safe_float_with_inf PASSED [ 70%]
+tests/test_extensions/test_futures_portfolio.py::TestSafeFloat::test_safe_float_with_valid_number PASSED [ 70%]
+tests/test_extensions/test_futures_portfolio.py::TestSafeFloat::test_safe_float_with_custom_default PASSED [ 70%]
+tests/test_extensions/test_futures_portfolio.py::TestSafeFloat::test_safe_float_with_string_returns_default PASSED [ 70%]
+tests/test_extensions/test_futures_portfolio.py::TestPortfolioAnalyticsDataclass::test_dataclass_fields_exist PASSED [ 70%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopBasicFunctionality::test_long_position_activates_at_threshold PASSED [ 71%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopBasicFunctionality::test_long_position_trails_from_peak PASSED [ 71%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopBasicFunctionality::test_long_position_exits_on_retracement PASSED [ 71%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopBasicFunctionality::test_short_position_activates_at_threshold PASSED [ 71%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopBasicFunctionality::test_short_position_trails_from_trough PASSED [ 71%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopBasicFunctionality::test_short_position_exits_on_retracement PASSED [ 72%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopBasicFunctionality::test_peak_updates_during_trailing[1] PASSED [ 72%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopBasicFunctionality::test_peak_updates_during_trailing[-1] PASSED [ 72%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopEdgeCases::test_no_exit_when_stop_never_triggered PASSED [ 72%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopEdgeCases::test_no_bars_after_entry PASSED [ 72%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopEdgeCases::test_zero_activation_percent PASSED [ 73%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopEdgeCases::test_activation_not_triggered PASSED [ 73%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopEdgeCases::test_immediate_stop_after_activation PASSED [ 73%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopEdgeCases::test_entry_beyond_array_bounds[1] PASSED [ 73%]
+tests/test_extensions/test_trailing_stops.py::TestDelayedTrailingStopEdgeCases::test_entry_beyond_array_bounds[-1] PASSED [ 73%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopBasicFunctionality::test_long_position_uses_high_for_peak PASSED [ 74%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopBasicFunctionality::test_short_position_uses_low_for_trough PASSED [ 74%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopBasicFunctionality::test_stop_distance_calculation PASSED [ 74%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopBasicFunctionality::test_atr_multiplier_variations[1.0] PASSED [ 74%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopBasicFunctionality::test_atr_multiplier_variations[2.0] PASSED [ 74%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopBasicFunctionality::test_atr_multiplier_variations[3.0] PASSED [ 75%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopBasicFunctionality::test_dynamic_atr_values PASSED [ 75%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopBasicFunctionality::test_immediate_trailing_no_activation_delay[1] PASSED [ 75%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopBasicFunctionality::test_immediate_trailing_no_activation_delay[-1] PASSED [ 75%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopEdgeCases::test_zero_atr_exits_immediately PASSED [ 75%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopEdgeCases::test_no_exit_when_stop_never_hit PASSED [ 76%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopEdgeCases::test_no_bars_after_entry PASSED [ 76%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopEdgeCases::test_negative_atr_multiplier PASSED [ 76%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopEdgeCases::test_entry_beyond_array_bounds[1] PASSED [ 76%]
+tests/test_extensions/test_trailing_stops.py::TestATRTrailingStopEdgeCases::test_entry_beyond_array_bounds[-1] PASSED [ 76%]
+tests/test_extensions/test_trailing_stops.py::TestGenerateTrailingExits::test_generates_exit_signals_for_entries PASSED [ 77%]
+tests/test_extensions/test_trailing_stops.py::TestGenerateTrailingExits::test_multiple_entries_generate_multiple_exits PASSED [ 77%]
+tests/test_extensions/test_trailing_stops.py::TestGenerateTrailingExits::test_delayed_stop_type PASSED [ 77%]
+tests/test_extensions/test_trailing_stops.py::TestGenerateTrailingExits::test_atr_stop_type PASSED [ 77%]
+tests/test_extensions/test_trailing_stops.py::TestGenerateTrailingExits::test_missing_atr_raises_error PASSED [ 77%]
+tests/test_extensions/test_trailing_stops.py::TestGenerateTrailingExits::test_empty_entries_array PASSED [ 78%]
+tests/test_extensions/test_trailing_stops.py::TestGenerateTrailingExits::test_no_entries_in_array PASSED [ 78%]
+tests/test_extensions/test_trailing_stops.py::TestGenerateTrailingExits::test_short_position_exits PASSED [ 78%]
+tests/test_extensions/test_trailing_stops.py::TestGenerateTrailingExits::test_zero_activation_immediate_trail PASSED [ 78%]
+tests/test_extensions/test_trailing_stops.py::TestGenerateTrailingExits::test_entry_with_no_exit PASSED [ 78%]
+tests/test_output/test_charts.py::TestEquityCurveChart::test_equity_chart_returns_figure PASSED [ 79%]
+tests/test_output/test_charts.py::TestEquityCurveChart::test_equity_chart_has_equity_trace PASSED [ 79%]
+tests/test_output/test_charts.py::TestEquityCurveChart::test_equity_chart_has_benchmark_line PASSED [ 79%]
+tests/test_output/test_charts.py::TestEquityCurveChart::test_equity_chart_has_title PASSED [ 79%]
+tests/test_output/test_charts.py::TestEquityCurveChart::test_equity_chart_dark_theme PASSED [ 80%]
+tests/test_output/test_charts.py::TestEquityCurveChart::test_equity_chart_with_datetime_index PASSED [ 80%]
+tests/test_output/test_charts.py::TestDrawdownChart::test_drawdown_chart_returns_figure PASSED [ 80%]
+tests/test_output/test_charts.py::TestDrawdownChart::test_drawdown_chart_has_area_trace PASSED [ 80%]
+tests/test_output/test_charts.py::TestDrawdownChart::test_drawdown_chart_has_title PASSED [ 80%]
+tests/test_output/test_charts.py::TestDrawdownChart::test_drawdown_chart_values_as_percentage PASSED [ 81%]
+tests/test_output/test_charts.py::TestDrawdownChart::test_drawdown_chart_dark_theme PASSED [ 81%]
+tests/test_output/test_charts.py::TestTradesChart::test_trades_chart_returns_figure PASSED [ 81%]
+tests/test_output/test_charts.py::TestTradesChart::test_trades_chart_has_price_trace PASSED [ 81%]
+tests/test_output/test_charts.py::TestTradesChart::test_trades_chart_has_entry_markers PASSED [ 81%]
+tests/test_output/test_charts.py::TestTradesChart::test_trades_chart_has_title PASSED [ 82%]
+tests/test_output/test_charts.py::TestTradesChart::test_trades_chart_with_empty_trades PASSED [ 82%]
+tests/test_output/test_charts.py::TestTradesChart::test_trades_chart_with_ohlc_data PASSED [ 82%]
+tests/test_output/test_charts.py::TestMonthlyHeatmap::test_monthly_heatmap_returns_figure PASSED [ 82%]
+tests/test_output/test_charts.py::TestMonthlyHeatmap::test_monthly_heatmap_has_heatmap_trace PASSED [ 82%]
+tests/test_output/test_charts.py::TestMonthlyHeatmap::test_monthly_heatmap_has_title PASSED [ 83%]
+tests/test_output/test_charts.py::TestMonthlyHeatmap::test_monthly_heatmap_with_custom_start_date PASSED [ 83%]
+tests/test_output/test_charts.py::TestMonthlyHeatmap::test_monthly_heatmap_dark_theme PASSED [ 83%]
+tests/test_output/test_charts.py::TestMonthlyHeatmap::test_monthly_heatmap_short_equity_curve PASSED [ 83%]
+tests/test_output/test_charts.py::TestMonthlyHeatmap::test_monthly_heatmap_single_bar_equity_curve PASSED [ 83%]
+tests/test_output/test_charts.py::TestChartFactoryEdgeCases::test_empty_equity_curve_handling PASSED [ 84%]
+tests/test_output/test_charts.py::TestChartFactoryEdgeCases::test_all_charts_produce_valid_figures PASSED [ 84%]
+tests/test_output/test_charts.py::TestChartFactoryEdgeCases::test_chart_data_consistency PASSED [ 84%]
+tests/test_output/test_charts.py::TestChartFactoryEdgeCases::test_trades_chart_with_direction_column PASSED [ 84%]
+tests/test_output/test_charts.py::TestChartFactoryEdgeCases::test_trades_chart_without_direction_column PASSED [ 84%]
+tests/test_output/test_charts.py::TestChartFactoryEdgeCases::test_monthly_heatmap_insufficient_monthly_data PASSED [ 85%]
+tests/test_output/test_charts.py::TestChartFactoryEdgeCases::test_equity_curve_with_datetime_axis PASSED [ 85%]
+tests/test_output/test_charts.py::TestChartFactoryEdgeCases::test_drawdown_curve_with_datetime_axis PASSED [ 85%]
+tests/test_output/test_charts.py::TestChartFactoryEdgeCases::test_trades_chart_with_datetime_index PASSED [ 85%]
+tests/test_output/test_charts.py::TestChartFactoryEdgeCases::test_trades_chart_fallback_to_numeric_index PASSED [ 85%]
+tests/test_output/test_exports.py::TestPngExport::test_png_export_creates_files PASSED [ 86%]
+tests/test_output/test_exports.py::TestPngExport::test_png_export_file_sizes PASSED [ 86%]
+tests/test_output/test_exports.py::TestPngExport::test_png_export_with_close_prices PASSED [ 86%]
+tests/test_output/test_exports.py::TestPngExport::test_png_export_custom_dimensions PASSED [ 86%]
+tests/test_output/test_exports.py::TestHtmlExport::test_html_export_creates_files PASSED [ 86%]
+tests/test_output/test_exports.py::TestHtmlExport::test_html_export_file_sizes PASSED [ 87%]
+tests/test_output/test_exports.py::TestHtmlExport::test_html_export_contains_plotly PASSED [ 87%]
+tests/test_output/test_exports.py::TestHtmlExport::test_html_export_with_close_prices PASSED [ 87%]
+tests/test_output/test_exports.py::TestHtmlExport::test_html_export_dark_theme PASSED [ 87%]
+tests/test_output/test_exports.py::TestCsvExport::test_csv_export_creates_files PASSED [ 87%]
+tests/test_output/test_exports.py::TestCsvExport::test_csv_export_equity_curve_columns PASSED [ 88%]
+tests/test_output/test_exports.py::TestCsvExport::test_csv_export_equity_curve_row_count PASSED [ 88%]
+tests/test_output/test_exports.py::TestCsvExport::test_csv_export_trades_columns PASSED [ 88%]
+tests/test_output/test_exports.py::TestCsvExport::test_csv_export_trades_row_count PASSED [ 88%]
+tests/test_output/test_exports.py::TestCsvExport::test_csv_export_metrics_content PASSED [ 88%]
+tests/test_output/test_exports.py::TestCsvExport::test_csv_export_monthly_returns PASSED [ 89%]
+tests/test_output/test_exports.py::TestCsvExport::test_csv_export_empty_trades PASSED [ 89%]
+tests/test_output/test_exports.py::TestCsvExport::test_csv_export_short_equity_curve PASSED [ 89%]
+tests/test_output/test_exports.py::TestExportAll::test_export_all_creates_directory_structure PASSED [ 89%]
+tests/test_output/test_exports.py::TestExportAll::test_export_all_creates_charts_subdirectory PASSED [ 89%]
+tests/test_output/test_exports.py::TestExportAll::test_export_all_creates_data_subdirectory PASSED [ 90%]
+tests/test_output/test_exports.py::TestExportAll::test_export_all_creates_report_json PASSED [ 90%]
+tests/test_output/test_exports.py::TestExportAll::test_export_all_report_json_structure PASSED [ 90%]
+tests/test_output/test_exports.py::TestExportAll::test_export_all_creates_csv_files PASSED [ 90%]
+tests/test_output/test_exports.py::TestExportAll::test_export_all_creates_html_files PASSED [ 90%]
+tests/test_output/test_exports.py::TestExportAll::test_export_all_with_close_prices PASSED [ 91%]
+tests/test_output/test_exports.py::TestExportAll::test_export_all_respects_dark_theme PASSED [ 91%]
+tests/test_output/test_exports.py::TestExportEdgeCases::test_export_creates_directory_if_missing PASSED [ 91%]
+tests/test_output/test_exports.py::TestExportEdgeCases::test_export_handles_empty_equity_curve PASSED [ 91%]
+tests/test_output/test_exports.py::TestExportEdgeCases::test_export_html_without_trades_chart PASSED [ 91%]
+tests/test_output/test_exports.py::TestExportEdgeCases::test_export_overwrites_existing_files PASSED [ 92%]
+tests/test_output/test_exports.py::TestCsvDataIntegrity::test_equity_curve_csv_values_match PASSED [ 92%]
+tests/test_output/test_exports.py::TestCsvDataIntegrity::test_metrics_csv_values_match PASSED [ 92%]
+tests/test_output/test_reports.py::TestTextReportRichMarkup::test_text_report_contains_rich_color_markup PASSED [ 92%]
+tests/test_output/test_reports.py::TestTextReportRichMarkup::test_text_report_contains_table_structure PASSED [ 92%]
+tests/test_output/test_reports.py::TestTextReportRichMarkup::test_text_report_has_formatted_metrics PASSED [ 93%]
+tests/test_output/test_reports.py::TestTextReportRichMarkup::test_sweep_text_report_contains_rich_markup PASSED [ 93%]
+tests/test_output/test_reports.py::TestBacktestTextReport::test_generate_text_report_returns_string PASSED [ 93%]
+tests/test_output/test_reports.py::TestBacktestTextReport::test_text_report_contains_metrics PASSED [ 93%]
+tests/test_output/test_reports.py::TestBacktestTextReport::test_text_report_percentage_formatting PASSED [ 93%]
+tests/test_output/test_reports.py::TestBacktestTextReport::test_text_report_ratio_formatting PASSED [ 94%]
+tests/test_output/test_reports.py::TestBacktestTextReport::test_text_report_metadata PASSED [ 94%]
+tests/test_output/test_reports.py::TestBacktestTextReport::test_text_report_rich_console_compatible PASSED [ 94%]
+tests/test_output/test_reports.py::TestBacktestJsonReport::test_generate_json_report_returns_dict PASSED [ 94%]
+tests/test_output/test_reports.py::TestBacktestJsonReport::test_json_report_serializable PASSED [ 94%]
+tests/test_output/test_reports.py::TestBacktestJsonReport::test_json_report_includes_timestamp PASSED [ 95%]
+tests/test_output/test_reports.py::TestBacktestJsonReport::test_json_report_includes_config_hash PASSED [ 95%]
+tests/test_output/test_reports.py::TestBacktestJsonReport::test_json_report_includes_strategy_name PASSED [ 95%]
+tests/test_output/test_reports.py::TestBacktestJsonReport::test_json_report_includes_metrics PASSED [ 95%]
+tests/test_output/test_reports.py::TestBacktestJsonReport::test_json_report_includes_trades_count PASSED [ 95%]
+tests/test_output/test_reports.py::TestBacktestJsonReport::test_json_report_converts_numpy_arrays PASSED [ 96%]
+tests/test_output/test_reports.py::TestBacktestJsonReport::test_json_report_converts_dataframe PASSED [ 96%]
+tests/test_output/test_reports.py::TestBacktestJsonReport::test_json_report_precision PASSED [ 96%]
+tests/test_output/test_reports.py::TestSweepTextReport::test_generate_sweep_text_report PASSED [ 96%]
+tests/test_output/test_reports.py::TestSweepTextReport::test_sweep_text_report_shows_top_n PASSED [ 96%]
+tests/test_output/test_reports.py::TestSweepTextReport::test_sweep_text_report_includes_params PASSED [ 97%]
+tests/test_output/test_reports.py::TestSweepTextReport::test_sweep_text_report_sorted_by_sharpe PASSED [ 97%]
+tests/test_output/test_reports.py::TestSweepJsonReport::test_generate_sweep_json_report PASSED [ 97%]
+tests/test_output/test_reports.py::TestSweepJsonReport::test_sweep_json_serializable PASSED [ 97%]
+tests/test_output/test_reports.py::TestSweepJsonReport::test_sweep_json_includes_best_params PASSED [ 97%]
+tests/test_output/test_reports.py::TestSweepJsonReport::test_sweep_json_includes_best_sharpe PASSED [ 98%]
+tests/test_output/test_reports.py::TestSweepJsonReport::test_sweep_json_includes_all_results PASSED [ 98%]
+tests/test_output/test_reports.py::TestSweepJsonReport::test_sweep_json_params_sorted PASSED [ 98%]
+tests/test_output/test_reports.py::TestSweepJsonReport::test_sweep_json_includes_metadata PASSED [ 98%]
+tests/test_output/test_reports.py::TestSweepJsonReport::test_sweep_json_includes_total_combinations PASSED [ 98%]
+tests/test_output/test_reports.py::TestEdgeCases::test_zero_trades_result PASSED [ 99%]
+tests/test_output/test_reports.py::TestEdgeCases::test_negative_returns PASSED [ 99%]
+tests/test_output/test_reports.py::TestEdgeCases::test_nan_values PASSED [ 99%]
+tests/test_output/test_reports.py::TestEdgeCases::test_invalid_result_type PASSED [ 99%]
+tests/test_output/test_reports.py::TestEdgeCases::test_empty_sweep_result PASSED [100%]
+ERROR: Coverage failure: total of 75 is less than fail-under=80
+
+
+=================================== FAILURES ===================================
+______________ TestBacktestCommand.test_backtest_command_success _______________
+tests/test_cli.py:313: in test_backtest_command_success
+    assert result.exit_code == 0
+E   assert 1 == 0
+E    +  where 1 = <Result SystemExit(1)>.exit_code
+________ TestBacktestCommand.test_backtest_command_creates_output_files ________
+tests/test_cli.py:338: in test_backtest_command_creates_output_files
+    assert_cli_success(result)
+tests/test_cli.py:54: in assert_cli_success
+    assert result.exit_code == 0, f"Command failed with: {result.stdout}"
+E   AssertionError: Command failed with: Loading data...
+E     Loaded 1000 bars
+E     Initializing strategy: momentum
+E     Generating signals...
+E     Generated 1000 signals
+E     ⠋ Running backtest...
+E     Unexpected error: module 'vectorbt' has no attribute 'Portfolio'
+E     Traceback (most recent call last):
+E       File 
+E     "/home/buckstrdr/simple_futures_backtester/simple_futures_backtester/cli.py", 
+E     line 161, in backtest
+E         result = engine.run(df["close"].values, signals, backtest_config)
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       File 
+E     "/home/buckstrdr/simple_futures_backtester/simple_futures_backtester/backtest/en
+E     gine.py", line 254, in run
+E         portfolio = vbt.Portfolio.from_signals(
+E                     ^^^^^^^^^^^^^
+E     AttributeError: module 'vectorbt' has no attribute 'Portfolio'
+E     
+E     
+E   assert 1 == 0
+E    +  where 1 = <Result SystemExit(1)>.exit_code
+----------------------------- Captured stdout call -----------------------------
+Exit code: 1
+Stdout: Loading data...
+Loaded 1000 bars
+Initializing strategy: momentum
+Generating signals...
+Generated 1000 signals
+⠋ Running backtest...
+Unexpected error: module 'vectorbt' has no attribute 'Portfolio'
+Traceback (most recent call last):
+  File 
+"/home/buckstrdr/simple_futures_backtester/simple_futures_backtester/cli.py", 
+line 161, in backtest
+    result = engine.run(df["close"].values, signals, backtest_config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"/home/buckstrdr/simple_futures_backtester/simple_futures_backtester/backtest/en
+gine.py", line 254, in run
+    portfolio = vbt.Portfolio.from_signals(
+                ^^^^^^^^^^^^^
+AttributeError: module 'vectorbt' has no attribute 'Portfolio'
+
+
+Exception:
+----------------------------- Captured stderr call -----------------------------
+Traceback (most recent call last):
+  File "/home/buckstrdr/.local/lib/python3.12/site-packages/typer/core.py", line 192, in _main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/buckstrdr/.local/lib/python3.12/site-packages/typer/main.py", line 691, in wrapper
+    return callback(**use_params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/buckstrdr/simple_futures_backtester/simple_futures_backtester/cli.py", line 201, in backtest
+    raise typer.Exit(code=1) from None
+click.exceptions.Exit
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/click/testing.py", line 408, in invoke
+    return_value = cli.main(args=args or (), prog_name=prog_name, **extra)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/buckstrdr/.local/lib/python3.12/site-packages/typer/core.py", line 803, in main
+    return _main(
+           ^^^^^^
+  File "/home/buckstrdr/.local/lib/python3.12/site-packages/typer/core.py", line 229, in _main
+    sys.exit(e.exit_code)
+SystemExit: 1
+____________ TestBacktestCommand.test_backtest_command_with_config _____________
+tests/test_cli.py:369: in test_backtest_command_with_config
+    assert result.exit_code == 0
+E   assert 1 == 0
+E    +  where 1 = <Result SystemExit(1)>.exit_code
+___________ TestBacktestCommand.test_backtest_command_with_overrides ___________
+tests/test_cli.py:396: in test_backtest_command_with_overrides
+    assert result.exit_code == 0
+E   assert 1 == 0
+E    +  where 1 = <Result SystemExit(1)>.exit_code
+____________ TestBacktestCommand.test_backtest_command_with_parquet ____________
+tests/test_cli.py:482: in test_backtest_command_with_parquet
+    assert result.exit_code == 0
+E   assert 1 == 0
+E    +  where 1 = <Result SystemExit(1)>.exit_code
+_________________ TestSweepCommand.test_sweep_command_success __________________
+tests/test_cli.py:509: in test_sweep_command_success
+    assert result.exit_code == 0
+E   assert 1 == 0
+E    +  where 1 = <Result SystemExit(1)>.exit_code
+___________ TestSweepCommand.test_sweep_command_creates_results_csv ____________
+tests/test_cli.py:537: in test_sweep_command_creates_results_csv
+    assert result.exit_code == 0
+E   assert 1 == 0
+E    +  where 1 = <Result SystemExit(1)>.exit_code
+_______________ TestSweepCommand.test_sweep_command_with_n_jobs ________________
+tests/test_cli.py:673: in test_sweep_command_with_n_jobs
+    assert result.exit_code == 0
+E   assert 1 == 0
+E    +  where 1 = <Result SystemExit(1)>.exit_code
+_____________ TestSweepEdgeCases.test_sweep_with_strategy_override _____________
+tests/test_cli.py:1773: in test_sweep_with_strategy_override
+    assert result.exit_code == 0
+E   assert 1 == 0
+E    +  where 1 = <Result SystemExit(1)>.exit_code
+____________ TestParquetInputCoverage.test_sweep_with_parquet_input ____________
+tests/test_cli.py:2136: in test_sweep_with_parquet_input
+    assert result.exit_code == 0
+E   assert 1 == 0
+E    +  where 1 = <Result SystemExit(1)>.exit_code
+__ TestBacktestWithOutputSuccess.test_backtest_output_export_success_message ___
+tests/test_cli.py:2192: in test_backtest_output_export_success_message
+    assert_cli_success(result)
+tests/test_cli.py:54: in assert_cli_success
+    assert result.exit_code == 0, f"Command failed with: {result.stdout}"
+E   AssertionError: Command failed with: Loading data...
+E     Loaded 1000 bars
+E     Initializing strategy: momentum
+E     Generating signals...
+E     Generated 1000 signals
+E     ⠋ Running backtest...
+E     Unexpected error: module 'vectorbt' has no attribute 'Portfolio'
+E     Traceback (most recent call last):
+E       File 
+E     "/home/buckstrdr/simple_futures_backtester/simple_futures_backtester/cli.py", 
+E     line 161, in backtest
+E         result = engine.run(df["close"].values, signals, backtest_config)
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       File 
+E     "/home/buckstrdr/simple_futures_backtester/simple_futures_backtester/backtest/en
+E     gine.py", line 254, in run
+E         portfolio = vbt.Portfolio.from_signals(
+E                     ^^^^^^^^^^^^^
+E     AttributeError: module 'vectorbt' has no attribute 'Portfolio'
+E     
+E     
+E   assert 1 == 0
+E    +  where 1 = <Result SystemExit(1)>.exit_code
+----------------------------- Captured stdout call -----------------------------
+Exit code: 1
+Stdout: Loading data...
+Loaded 1000 bars
+Initializing strategy: momentum
+Generating signals...
+Generated 1000 signals
+⠋ Running backtest...
+Unexpected error: module 'vectorbt' has no attribute 'Portfolio'
+Traceback (most recent call last):
+  File 
+"/home/buckstrdr/simple_futures_backtester/simple_futures_backtester/cli.py", 
+line 161, in backtest
+    result = engine.run(df["close"].values, signals, backtest_config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"/home/buckstrdr/simple_futures_backtester/simple_futures_backtester/backtest/en
+gine.py", line 254, in run
+    portfolio = vbt.Portfolio.from_signals(
+                ^^^^^^^^^^^^^
+AttributeError: module 'vectorbt' has no attribute 'Portfolio'
+
+
+Exception:
+----------------------------- Captured stderr call -----------------------------
+Traceback (most recent call last):
+  File "/home/buckstrdr/.local/lib/python3.12/site-packages/typer/core.py", line 192, in _main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/buckstrdr/.local/lib/python3.12/site-packages/typer/main.py", line 691, in wrapper
+    return callback(**use_params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/buckstrdr/simple_futures_backtester/simple_futures_backtester/cli.py", line 201, in backtest
+    raise typer.Exit(code=1) from None
+click.exceptions.Exit
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/click/testing.py", line 408, in invoke
+    return_value = cli.main(args=args or (), prog_name=prog_name, **extra)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/buckstrdr/.local/lib/python3.12/site-packages/typer/core.py", line 803, in main
+    return _main(
+           ^^^^^^
+  File "/home/buckstrdr/.local/lib/python3.12/site-packages/typer/core.py", line 229, in _main
+    sys.exit(e.exit_code)
+SystemExit: 1
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.12.3-final-0 ________________
+
+Name                                                            Stmts   Miss Branch BrPart  Cover   Missing
+-----------------------------------------------------------------------------------------------------------
+simple_futures_backtester/__init__.py                               5      0      0      0   100%
+simple_futures_backtester/backtest/__init__.py                      3      0      0      0   100%
+simple_futures_backtester/backtest/engine.py                      108     59     26      2    38%   115-123, 136-144, 156-164, 213, 223, 267-268, 285-366
+simple_futures_backtester/backtest/sweep.py                        96     30     24      6    63%   138-163, 228, 230, 306, 358-372, 441-447, 510, 519-522, 539, 567-569
+simple_futures_backtester/bars/__init__.py                         67     13     12      4    73%   72, 155, 198, 200, 223-226, 254-257, 265
+simple_futures_backtester/bars/dollar_bars.py                      61     35     16      0    44%   74-126
+simple_futures_backtester/bars/imbalance_bars.py                  111     80     32      0    27%   95-154, 304-363
+simple_futures_backtester/bars/range_bars.py                       25      0      8      0   100%
+simple_futures_backtester/bars/renko.py                            34      0     14      0   100%
+simple_futures_backtester/bars/tick_bars.py                        25      0      8      1    97%   198->208
+simple_futures_backtester/bars/volume_bars.py                      51     32     12      0    37%   73-120
+simple_futures_backtester/cli.py                                  400     46     84      7    87%   162-179, 193->195, 264->266, 313, 326-386, 396-397, 407->409, 489, 562->564, 566-567, 628-632, 823->829, 856
+simple_futures_backtester/config.py                                98     12     38     16    79%   103, 114, 125, 136, 147, 158, 212, 219, 227->235, 229, 235->247, 237->247, 249->258, 251, 283, 301
+simple_futures_backtester/data/__init__.py                          3      0      0      0   100%
+simple_futures_backtester/data/loader.py                           60     12     10      2    80%   104-105, 130-131, 214, 218-221, 263, 267-268
+simple_futures_backtester/data/validation.py                       59      2     16      1    96%   148-149
+simple_futures_backtester/extensions/__init__.py                    3      0      0      0   100%
+simple_futures_backtester/extensions/futures_portfolio.py         134      0     34      0   100%
+simple_futures_backtester/extensions/trailing_stops.py             26      0     10      0   100%
+simple_futures_backtester/output/__init__.py                        4      0      0      0   100%
+simple_futures_backtester/output/charts.py                        145      7     50      3    95%   381->421, 421->450, 525-538, 542-552
+simple_futures_backtester/output/exports.py                        92      8     12      2    90%   372-378, 382-384, 522
+simple_futures_backtester/output/reports.py                       153      4     34      2    97%   48, 54-55, 102
+simple_futures_backtester/strategy/__init__.py                      2      0      0      0   100%
+simple_futures_backtester/strategy/base.py                         42     10     10      3    71%   140, 178, 212, 214, 245, 273-276, 284
+simple_futures_backtester/strategy/examples/__init__.py             4      0      0      0   100%
+simple_futures_backtester/strategy/examples/breakout.py            34     23      0      0    32%   64-66, 94-108, 145-174
+simple_futures_backtester/strategy/examples/mean_reversion.py      26     15      0      0    42%   64-66, 95-102, 137-154
+simple_futures_backtester/strategy/examples/momentum.py            36      0      0      0   100%
+simple_futures_backtester/utils/__init__.py                         3      0      0      0   100%
+simple_futures_backtester/utils/benchmarks.py                     151     50     60     16    62%   102-103, 106->119, 113->112, 117, 121, 126, 164, 168, 188->193, 195, 199-202, 207, 230-278, 303-304, 319-338, 373, 421, 427-432, 461
+simple_futures_backtester/utils/jit_utils.py                       59     33     26      4    38%   95, 100-103, 139, 144-150, 191-203, 237-251, 273
+-----------------------------------------------------------------------------------------------------------
+TOTAL                                                            2120    471    536     69    75%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+FAIL Required test coverage of 80.0% not reached. Total coverage: 75.30%
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::TestBacktestCommand::test_backtest_command_success
+FAILED tests/test_cli.py::TestBacktestCommand::test_backtest_command_creates_output_files
+FAILED tests/test_cli.py::TestBacktestCommand::test_backtest_command_with_config
+FAILED tests/test_cli.py::TestBacktestCommand::test_backtest_command_with_overrides
+FAILED tests/test_cli.py::TestBacktestCommand::test_backtest_command_with_parquet
+FAILED tests/test_cli.py::TestSweepCommand::test_sweep_command_success - asse...
+FAILED tests/test_cli.py::TestSweepCommand::test_sweep_command_creates_results_csv
+FAILED tests/test_cli.py::TestSweepCommand::test_sweep_command_with_n_jobs - ...
+FAILED tests/test_cli.py::TestSweepEdgeCases::test_sweep_with_strategy_override
+FAILED tests/test_cli.py::TestParquetInputCoverage::test_sweep_with_parquet_input
+FAILED tests/test_cli.py::TestBacktestWithOutputSuccess::test_backtest_output_export_success_message
+================== 11 failed, 482 passed, 2 skipped in 46.38s ==================

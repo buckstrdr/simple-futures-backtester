@@ -1,0 +1,111 @@
+{
+  "_description": "Performance benchmark targets for CI comparison. Tests fail if actual performance is below tolerance threshold.",
+  "_usage": "Used by pytest-benchmark and CI workflows to validate performance regressions.",
+  "_tolerance_note": "tolerance is a multiplier - 0.8 means 80% of target is passing threshold for throughput, 1.2 means 120% is passing for latency",
+
+  "bar_generation": {
+    "target": 1000000.0,
+    "unit": "rows/sec",
+    "comparison": "higher",
+    "tolerance": 0.8,
+    "description": "All bar generators must achieve at least 1M rows/sec throughput"
+  },
+
+  "renko_bars": {
+    "target": 1000000.0,
+    "unit": "rows/sec",
+    "comparison": "higher",
+    "tolerance": 0.8,
+    "description": "Renko bar generation throughput with 1M rows"
+  },
+
+  "range_bars": {
+    "target": 1000000.0,
+    "unit": "rows/sec",
+    "comparison": "higher",
+    "tolerance": 0.8,
+    "description": "Range bar generation throughput with 1M rows"
+  },
+
+  "tick_bars": {
+    "target": 1000000.0,
+    "unit": "rows/sec",
+    "comparison": "higher",
+    "tolerance": 0.8,
+    "description": "Tick bar generation throughput with 1M rows"
+  },
+
+  "volume_bars": {
+    "target": 1000000.0,
+    "unit": "rows/sec",
+    "comparison": "higher",
+    "tolerance": 0.8,
+    "description": "Volume bar generation throughput with 1M rows"
+  },
+
+  "dollar_bars": {
+    "target": 1000000.0,
+    "unit": "rows/sec",
+    "comparison": "higher",
+    "tolerance": 0.8,
+    "description": "Dollar bar generation throughput with 1M rows"
+  },
+
+  "tick_imbalance_bars": {
+    "target": 1000000.0,
+    "unit": "rows/sec",
+    "comparison": "higher",
+    "tolerance": 0.8,
+    "description": "Tick Imbalance bar generation throughput with 1M rows"
+  },
+
+  "volume_imbalance_bars": {
+    "target": 1000000.0,
+    "unit": "rows/sec",
+    "comparison": "higher",
+    "tolerance": 0.8,
+    "description": "Volume Imbalance bar generation throughput with 1M rows"
+  },
+
+  "single_backtest": {
+    "target_aspirational": 50.0,
+    "target_practical": 200.0,
+    "unit": "ms",
+    "comparison": "lower",
+    "tolerance": 1.2,
+    "description": "Single backtest execution latency. Aspirational: 50ms, Practical: 200ms (VectorBT overhead)",
+    "env_override": "SFB_BACKTEST_LATENCY_MS"
+  },
+
+  "parameter_sweep_100": {
+    "target_aspirational": 10.0,
+    "target_practical": 30.0,
+    "unit": "seconds",
+    "comparison": "lower",
+    "tolerance": 1.2,
+    "description": "100-combination sweep time. Aspirational: 10s, Practical: 30s (VectorBT overhead)",
+    "env_override": "SFB_SWEEP_100_THRESHOLD_SEC"
+  },
+
+  "data_loading_1M": {
+    "target": 2.0,
+    "unit": "seconds",
+    "comparison": "lower",
+    "tolerance": 1.2,
+    "description": "Loading 1M rows from CSV/Parquet must complete in under 2 seconds"
+  },
+
+  "peak_memory_5M": {
+    "target": 2048.0,
+    "unit": "MB",
+    "comparison": "lower",
+    "tolerance": 1.2,
+    "description": "Peak memory usage for 5M rows must stay under 2GB"
+  },
+
+  "_ci_thresholds": {
+    "fail_on_regression": true,
+    "regression_threshold_percent": 20,
+    "description": "CI will fail if any benchmark regresses by more than 20% from baseline"
+  }
+}

@@ -1,0 +1,191 @@
+@startuml Simple Futures Backtester - Data Flow Diagram
+
+title Simple Futures Backtester - Data Flow Pipeline
+skinparam backgroundColor #FEFEFE
+skinparam shadowing false
+
+' Define styles
+skinparam activity {
+    BackgroundColor #E8F5E9
+    BorderColor #4CAF50
+    FontColor #1B5E20
+}
+
+skinparam rectangle {
+    BackgroundColor #E3F2FD
+    BorderColor #2196F3
+    FontColor #0D47A1
+}
+
+skinparam database {
+    BackgroundColor #FFF3E0
+    BorderColor #FF9800
+    FontColor #E65100
+}
+
+skinparam cloud {
+    BackgroundColor #FCE4EC
+    BorderColor #E91E63
+    FontColor #880E4F
+}
+
+' Legend
+legend right
+  |= Symbol |= Description |
+  | <#E8F5E9> | Processing Component |
+  | <#E3F2FD> | Data Type/Structure |
+  | <#FFF3E0> | Data Storage |
+  | <#FCE4EC> | External Component |
+  | --> | Data Flow |
+  | ..> | Optional/Feature Flag |
+endlegend
+
+' Data Sources
+database "CSV/Parquet Files" as source {
+    [OHLCV Data]
+    [Symbol Metadata]
+}
+
+' Data Loading Stage
+rectangle "DataLoader" as loader {
+    [Schema Enforcement]
+    [Dtype Normalization]
+}
+
+' Validation Stage
+rectangle "DataValidation" as validation {
+    [Numeric Bounds Check]
+    [Timestamp Ordering]
+    [Gap Detection]
+}
+
+' Bar Factory Stage
+rectangle "BarFactory" as bars {
+    [Time Bars (default)]
+    [Renko Bars]
+    [Range Bars]
+    [Volume Bars]
+    [Imbalance Bars]
+}
+
+' Indicator Stage
+cloud "VectorBT Indicators" as vbtInd {
+    [RSI]
+    [MA / EMA / SMA]
+    [MACD]
+    [ATR]
+    [Bollinger Bands]
+}
+
+rectangle "IndicatorKernel" as indicators {
+    [Trend Indicators]
+    [Momentum Indicators]
+    [Volatility Indicators]
+    [Custom Indicators]
+}
+
+' Strategy Stage
+rectangle "StrategyFramework" as strategy {
+    [Entry Logic]
+    [Exit Logic]
+    [Signal Generation]
+    [Position Sizing]
+}
+
+' Backtest Stage
+cloud "VectorBT Portfolio" as vbtPort {
+    [Portfolio.from_signals()]
+    [Trade Simulation]
+    [Record Generation]
+}
+
+rectangle "BacktestEngine" as backtest {
+    [Signal Translation]
+    [Fees/Slippage]
+    [Position Management]
+}
+
+' Metrics Stage
+rectangle "MetricsCalculator" as metrics {
+    [Return Metrics]
+    [Risk Metrics]
+    [Drawdown Analysis]
+    [Trade Statistics]
+}
+
+' Output Stage
+rectangle "OutputReporter" as output {
+    [CSV Export]
+    [JSON Export]
+    [Console Display]
+    [Visualization]
+}
+
+' Data flow structures
+rectangle "DataFrame\n(Raw OHLCV)" as df_raw #E3F2FD
+rectangle "DataFrame\n(Validated)" as df_valid #E3F2FD
+rectangle "NumPy Arrays\n(Bar Data)" as arr_bars #E3F2FD
+rectangle "NumPy Arrays\n(Indicator Values)" as arr_ind #E3F2FD
+rectangle "NumPy Arrays\n(Entry/Exit Signals)" as arr_sig #E3F2FD
+rectangle "BacktestResult\n(dataclass)" as result #E3F2FD
+rectangle "MetricsBundle\n(dataclass)" as metrics_bundle #E3F2FD
+
+' Output destinations
+database "Reports" as reports {
+    [Performance Report]
+    [Trade Log]
+    [Equity Curve]
+}
+
+' Main data flow
+source --> loader : "File I/O"
+loader --> df_raw
+df_raw --> validation : "Schema-validated data"
+validation --> df_valid
+df_valid --> bars : "Clean OHLCV"
+bars --> arr_bars : "Bar arrays"
+arr_bars --> indicators : "Price/Volume data"
+vbtInd --> indicators : "Battle-tested implementations"
+indicators --> arr_ind : "Indicator arrays"
+arr_ind --> strategy : "Technical analysis"
+strategy --> arr_sig : "Boolean entry/exit arrays"
+arr_sig --> backtest : "Trading signals"
+vbtPort --> backtest : "Portfolio simulation"
+backtest --> result : "Simulation output"
+result --> metrics : "Trade records + PnL"
+metrics --> metrics_bundle
+metrics_bundle --> output : "Formatted results"
+output --> reports : "Persisted output"
+
+' Alternative bar flow (feature flag)
+validation ..> bars : "Feature flag:\nAlternative bars"
+
+' Notes
+note right of bars
+  **Bar Types:**
+  - Time bars: Fixed time intervals
+  - Renko: Fixed price movements
+  - Range: Price range threshold
+  - Volume: Fixed volume threshold
+  - Imbalance: Tick imbalance
+end note
+
+note right of backtest
+  **BacktestResult contains:**
+  - Portfolio returns
+  - Trade records
+  - Order records
+  - Position history
+  - Equity curve
+end note
+
+note right of metrics
+  **Key Metrics:**
+  - Total Return, CAGR
+  - Sharpe, Sortino, Calmar
+  - Max Drawdown, Duration
+  - Win Rate, Profit Factor
+  - Avg Trade Duration
+end note
+
+@enduml

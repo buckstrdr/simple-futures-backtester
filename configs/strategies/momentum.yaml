@@ -1,0 +1,26 @@
+# Momentum Strategy Configuration
+# Uses RSI and EMA crossovers to identify trend momentum
+
+strategy:
+  name: momentum
+  parameters:
+    # RSI settings
+    rsi_period: 14
+    rsi_overbought: 70
+    rsi_oversold: 30
+
+    # EMA crossover settings
+    fast_ema: 9
+    slow_ema: 21
+
+    # Signal thresholds
+    trend_strength_min: 0.02
+    lookback_period: 20
+
+backtest:
+  initial_capital: 100000
+  fees: 0.0001
+  slippage: 0.0001
+  size: 1
+  size_type: fixed
+  freq: 1D
