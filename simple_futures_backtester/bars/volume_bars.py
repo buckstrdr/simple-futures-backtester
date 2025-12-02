@@ -33,7 +33,7 @@ from simple_futures_backtester.utils.jit_utils import (
 _jit = get_njit_decorator(cache=True, parallel=False)
 
 
-@_jit
+@_jit  # pragma: no cover
 def _generate_volume_bars_nb(
     open_arr: NDArray[np.float64],
     high_arr: NDArray[np.float64],

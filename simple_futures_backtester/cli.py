@@ -8,6 +8,7 @@ import csv
 import itertools
 from pathlib import Path
 
+import pandas as pd
 import typer
 from rich.console import Console
 from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn, TimeRemainingColumn
@@ -18,6 +19,8 @@ from simple_futures_backtester.strategy.base import get_strategy, list_strategie
 from simple_futures_backtester.strategy.examples import (
     BreakoutStrategy,
     MeanReversionStrategy,
+    MNQChopADXScalper,
+    MNQVortexScalper,
     MomentumStrategy,
 )
 
@@ -25,6 +28,8 @@ from simple_futures_backtester.strategy.examples import (
 register_strategy("momentum", MomentumStrategy)
 register_strategy("mean_reversion", MeanReversionStrategy)
 register_strategy("breakout", BreakoutStrategy)
+register_strategy("MNQVortexScalper", MNQVortexScalper)
+register_strategy("MNQChopADXScalper", MNQChopADXScalper)
 
 app = typer.Typer(
     name="sfb",

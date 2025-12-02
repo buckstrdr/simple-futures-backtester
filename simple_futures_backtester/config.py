@@ -40,14 +40,18 @@ class BacktestConfig:
         size: Position size (number of contracts or units).
         size_type: How size is interpreted ("fixed", "percent", "target").
         freq: Rebalancing frequency (e.g., "1D", "1H", "5m").
+        contract_multiplier: Dollar value per point for futures contracts.
+                            MGC: $10/point, MNQ: $2/point, MES: $5/point, etc.
+                            Set to 1.0 for stocks/crypto (no multiplier).
     """
 
     initial_capital: float = 100000.0
     fees: float = 0.0001
     slippage: float = 0.0001
-    size: int = 1
-    size_type: str = "fixed"
+    size: float = 1.0
+    size_type: str = "percent"
     freq: str = "1D"
+    contract_multiplier: float = 1.0  # Default: no multiplier (stocks/crypto)
 
 
 @dataclass

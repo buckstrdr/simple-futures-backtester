@@ -231,13 +231,23 @@ class BacktestEngine:
         # Short entries: signal changes from non--1 to -1
         short_entries = (signals_series == -1) & (signals_series.shift(1) != -1)
 
+        # Long exits: signal changes from 1 to non-1 (0 or -1)
+        long_exits = (signals_series != 1) & (signals_series.shift(1) == 1)
+
+        # Short exits: signal changes from -1 to non--1 (0 or 1)
+        short_exits = (signals_series != -1) & (signals_series.shift(1) == -1)
+
         # Handle first bar (NaN after shift -> fillna(False))
         long_entries = long_entries.fillna(False)
         short_entries = short_entries.fillna(False)
+        long_exits = long_exits.fillna(False)
+        short_exits = short_exits.fillna(False)
 
         # Convert to numpy boolean arrays
         long_entries_arr = long_entries.values.astype(bool)
         short_entries_arr = short_entries.values.astype(bool)
+        long_exits_arr = long_exits.values.astype(bool)
+        short_exits_arr = short_exits.values.astype(bool)
 
         # Create pandas Series for price data with datetime index
         close_series = pd.Series(
@@ -251,10 +261,13 @@ class BacktestEngine:
         # Create portfolio with bi-directional trading
         # When providing short_entries explicitly, direction='both' is implied
         # and doesn't need to be specified (VectorBT warns if both are set)
+        # Pass explicit exits so TP/SL logic from strategy is respected
         portfolio = vbt.Portfolio.from_signals(
             close=close_series,
             entries=long_entries_arr,
+            exits=long_exits_arr,
             short_entries=short_entries_arr,
+            short_exits=short_exits_arr,
             init_cash=config.initial_capital,
             fees=config.fees,
             slippage=config.slippage,
@@ -265,6 +278,11 @@ class BacktestEngine:
 
         # Extract metrics from portfolio
         result = self._extract_metrics(portfolio, config)
+
+        # Apply contract multiplier for futures if specified
+        if config.contract_multiplier != 1.0:
+            result = self._apply_contract_multiplier(result, config)
+
         return result
 
     def _extract_metrics(
@@ -377,6 +395,111 @@ class BacktestEngine:
             trades=trades_df,
             config_hash=config_hash,
             timestamp=timestamp,
+        )
+
+    def _apply_contract_multiplier(
+        self,
+        result: BacktestResult,
+        config: BacktestConfig,
+    ) -> BacktestResult:
+        """Apply futures contract multiplier to P&L-based metrics.
+
+        VectorBT calculates P&L as price changes × contracts, but doesn't know
+        about futures contract multipliers. This method scales all dollar-based
+        metrics by the multiplier.
+
+        For example, MGC: $10/point means a 10 point move on 1 contract = $100.
+        VectorBT calculates: 10 points × 1 contract = $10 profit
+        We scale: $10 × 10 multiplier = $100 profit (correct)
+
+        Args:
+            result: BacktestResult from VectorBT.
+            config: BacktestConfig with contract_multiplier.
+
+        Returns:
+            BacktestResult with scaled metrics.
+        """
+        multiplier = config.contract_multiplier
+
+        # Scale equity curve (portfolio value at each bar)
+        # Profit portion = (equity - initial_capital)
+        # Scaled profit = profit × multiplier
+        # New equity = initial_capital + (scaled profit)
+        scaled_equity = config.initial_capital + (
+            (result.equity_curve - config.initial_capital) * multiplier
+        )
+
+        # Total return needs recalculation from scaled equity
+        final_value = scaled_equity[-1]
+        scaled_return = (final_value - config.initial_capital) / config.initial_capital
+
+        # Drawdown curve needs recalculation from scaled equity
+        running_max = np.maximum.accumulate(scaled_equity)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            scaled_drawdown = np.where(
+                running_max > 0,
+                (scaled_equity - running_max) / running_max,
+                0.0,
+            )
+        scaled_drawdown = np.asarray(scaled_drawdown, dtype=np.float64)
+
+        # Max drawdown
+        scaled_max_dd = abs(np.min(scaled_drawdown))
+
+        # Average trade PnL (scale point profit to dollar profit)
+        scaled_avg_trade = result.avg_trade * multiplier
+
+        # Sharpe and Sortino are based on returns, which scale proportionally
+        # Returns = profit / capital
+        # Scaled returns = (profit × multiplier) / capital = returns × multiplier
+        # Sharpe = mean(returns) / std(returns)
+        # Scaled Sharpe = mean(returns × m) / std(returns × m) = Sharpe × m / m = Sharpe
+        # Actually Sharpe stays the SAME because both numerator and denominator scale equally
+
+        # However, we need to recalculate from scaled equity to be accurate
+        returns_series = pd.Series(scaled_equity).pct_change().dropna()
+        if len(returns_series) > 0:
+            mean_return = returns_series.mean()
+            std_return = returns_series.std()
+            if std_return > 0:
+                # Annualize assuming 252 trading days
+                sharpe = (mean_return / std_return) * np.sqrt(252)
+            else:
+                sharpe = 0.0
+
+            # Sortino uses only downside deviation
+            downside_returns = returns_series[returns_series < 0]
+            if len(downside_returns) > 0:
+                downside_std = downside_returns.std()
+                if downside_std > 0:
+                    sortino = (mean_return / downside_std) * np.sqrt(252)
+                else:
+                    sortino = 0.0
+            else:
+                sortino = 0.0
+        else:
+            sharpe = 0.0
+            sortino = 0.0
+
+        # Trades DataFrame - scale PnL column if it exists
+        scaled_trades = result.trades.copy()
+        if 'PnL' in scaled_trades.columns:
+            scaled_trades['PnL'] = scaled_trades['PnL'] * multiplier
+
+        return BacktestResult(
+            total_return=scaled_return,
+            sharpe_ratio=sharpe,
+            sortino_ratio=sortino,
+            max_drawdown=scaled_max_dd,
+            win_rate=result.win_rate,  # Win rate doesn't change
+            profit_factor=result.profit_factor,  # Ratio doesn't change (scales cancel)
+            n_trades=result.n_trades,  # Trade count doesn't change
+            avg_trade=scaled_avg_trade,
+            equity_curve=scaled_equity,
+            drawdown_curve=scaled_drawdown,
+            trades=scaled_trades,
+            config_hash=result.config_hash,
+            timestamp=result.timestamp,
         )
 
 
