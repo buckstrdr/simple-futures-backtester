@@ -191,3 +191,29 @@ data/
 # Exception: keep sample data in tests
 !tests/test_data/*.csv
 !tests/test_data/*.parquet
+
+# Codemachine (from origin/codemacine/dev)
+.codemachine/logs
+.codemachine/memory
+.codemachine/prompts
+.codemachine/agents
+.codemachine/template.json
+
+# Additional system files
+.Xauthority
+.Xresources
+.bash_history*
+.dmrc
+.sudo_as_admin_successful
+.xsession-errors*
+
+# Additional IDE
+.codex/
+.serena/
+.vmcp/
+
+# Credentials
+GH\ token
+.gnupg/
+.git-credentials
+
