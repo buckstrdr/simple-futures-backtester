@@ -6,7 +6,8 @@ A high-performance, vectorized futures backtesting framework built on a forked V
 
 - **High Performance**: JIT-compiled bar factories achieving 1M+ rows/sec generation
 - **Alternative Bar Types**: Renko, Range, Tick, Volume, Dollar, and Imbalance bars
-- **VectorBT Integration**: Full access to RSI, MA, MACD, ATR, Bollinger Bands, and more
+- **Multiple Strategy Examples**: 20+ pre-built strategies including Big Trend, Vortex, VWAP, ORB
+- **Vectorized Indicators**: Fast indicator calculations using NumPy/Pandas
 - **Futures-Specific**: Point value application at analytics extraction
 - **Trailing Stops**: Delayed and ATR-based trailing stop implementations
 - **Parameter Sweeps**: Grid search optimization via ProcessPoolExecutor
@@ -79,6 +80,154 @@ python -c "import vectorbt as vbt; print(f'VectorBT version: {vbt.__version__}')
 | `ModuleNotFoundError: No module named 'vectorbt'` | Run `pip install -e lib/vectorbt/` again |
 | Version mismatch (not 0.26.2) | Clear `PYTHONPATH` and reinstall fork |
 | Import conflicts | Remove any system-level vectorbt: `pip uninstall vectorbt` |
+
+## How It Works
+
+### Architecture Overview
+
+The Simple Futures Backtester is organized into several key components:
+
+```
+Data Loading → Indicator Calculation → Strategy Signal Generation → Backtest Execution → Analysis
+```
+
+**1. Data Pipeline**
+- Accepts OHLCV data in CSV format with `time`, `open`, `high`, `low`, `close`, `volume` columns
+- Supports alternative bar types (Renko, Volume, Dollar bars, etc.)
+- Validates data integrity before processing
+
+**2. Strategy Framework**
+Strategies inherit from a base class and implement three key methods:
+
+```python
+class YourStrategy:
+    def calculate_indicators(self, df: pd.DataFrame) -> pd.DataFrame:
+        # Add technical indicators (RSI, ATR, ADX, etc.)
+        df['rsi'] = calculate_rsi(df['close'], period=14)
+        df['atr'] = calculate_atr(df, period=14)
+        return df
+
+    def generate_signals(self, df: pd.DataFrame) -> pd.DataFrame:
+        # Generate entry/exit signals based on indicators
+        df['signal'] = 0  # 1=long, -1=short, 0=flat
+        df['position_size'] = 0  # Size of position
+        return df
+
+    def backtest(self, df: pd.DataFrame, initial_capital: float) -> Dict:
+        # Run backtest and return performance metrics
+        return metrics, trades, signals_df
+```
+
+**3. Backtest Engine**
+- Walks through bar-by-bar price data
+- Executes entry/exit signals with realistic assumptions
+- Tracks equity, drawdown, trade-by-trade results
+- Applies contract multipliers for futures-specific calculations
+
+**4. Performance Metrics**
+Returns comprehensive statistics including:
+- **Total Return**: Percentage gain/loss
+- **Win Rate**: Percentage of profitable trades
+- **Profit Factor**: Gross profit / gross loss
+- **Sharpe Ratio**: Risk-adjusted returns
+- **Max Drawdown**: Largest peak-to-trough decline
+- **Average Trade**: Mean P&L per trade
+- **Risk/Reward Ratio**: Average win / average loss
+
+### Available Strategy Examples
+
+The framework includes 20+ pre-built strategies in `/simple_futures_backtester/strategy/examples/`:
+
+| Strategy | Description | Key Indicators |
+|----------|-------------|----------------|
+| **big_trend_scalper_v8** | Momentum breakout with ADX filtering | ADX, DI Spread, ATR, SMA |
+| **mnq_vortex** | Vortex indicator with volume confirmation | VI+, VI-, Volume |
+| **orb** | Opening Range Breakout | First bar high/low |
+| **vwap_mean_reversion** | Mean reversion around VWAP | VWAP, Standard Bands |
+| **supertrend_adx_volume** | Supertrend with trend strength filter | Supertrend, ADX, Volume |
+| **data_driven_mean_reversion** | Statistical mean reversion | Z-Score, Bollinger Bands |
+
+Each strategy demonstrates different patterns:
+- Trend following vs mean reversion
+- Single timeframe vs multi-timeframe
+- Simple vs complex entry logic
+- Different exit strategies (scalp, trailing, ATR-based)
+
+### Python API Usage
+
+Beyond the CLI, you can use the framework directly in Python:
+
+```python
+from simple_futures_backtester.strategy.examples.big_trend_scalper_v8 import BigTrendScalperV8Strategy
+import pandas as pd
+
+# Load your data
+df = pd.read_csv("your_data.csv")
+df['time'] = pd.to_datetime(df['time'])
+
+# Initialize strategy
+strategy = BigTrendScalperV8Strategy(
+    min_entry_momentum=8.0,
+    adx_threshold=30.0,
+    di_spread_threshold=20.0,
+    contract_multiplier=2.0
+)
+
+# Run backtest
+metrics, trades, signals_df = strategy.backtest(df, initial_capital=100000.0)
+
+# Analyze results
+print(f"Total Return: {metrics['total_return']:.2%}")
+print(f"Win Rate: {metrics['win_rate']:.1%}")
+print(f"Profit Factor: {metrics['profit_factor']:.2f}")
+print(f"Sharpe Ratio: {metrics['sharpe_ratio']:.2f}")
+print(f"\nTrades executed: {len(trades)}")
+print(f"Average P&L per trade: ${metrics['total_pnl_dollars']/len(trades):.2f}")
+```
+
+### Creating Custom Strategies
+
+To create your own strategy:
+
+1. **Create a new file** in `simple_futures_backtester/strategy/examples/`
+2. **Implement the three methods**: `calculate_indicators`, `generate_signals`, `backtest`
+3. **Test** using the CLI or Python API
+
+Example custom strategy skeleton:
+
+```python
+from typing import Dict
+import pandas as pd
+import numpy as np
+
+class MyCustomStrategy:
+    def __init__(self, param1: float = 14.0, param2: float = 2.0):
+        self.param1 = param1
+        self.param2 = param2
+        self.contract_multiplier = 2.0
+
+    def calculate_indicators(self, df: pd.DataFrame) -> pd.DataFrame:
+        # Add your indicators
+        df['custom_indicator'] = your_calculation(df, self.param1)
+        return df
+
+    def generate_signals(self, df: pd.DataFrame) -> pd.DataFrame:
+        df = self.calculate_indicators(df)
+        df['signal'] = 0
+        df['position_size'] = 0
+
+        # Your entry/exit logic
+        for i in range(len(df)):
+            # Implement your rules here
+            pass
+
+        return df
+
+    def backtest(self, df: pd.DataFrame, initial_capital: float = 100000.0) -> Dict:
+        df = self.generate_signals(df)
+        # Standard backtest execution (see examples for full implementation)
+        return metrics, trades_df, df
+```
 
 ## Quick Start
 
